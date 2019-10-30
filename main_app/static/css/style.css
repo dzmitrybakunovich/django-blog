@@ -1,0 +1,584 @@
+@font-face {
+    font-family: 'TT Norms';
+        url('../fonts/TTNorms-Thin.woff2') format('woff2'),
+        url('../fonts/TTNorms-Thin.woff') format('woff'),
+        url('../fonts/TTNorms-Thin.ttf') format('truetype');
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+header{
+	height: 85px;
+	width: 100%;
+	background: #0A111B;
+	display: flex;
+}
+
+input#button_sign_in{
+	margin-left: 40px;
+	font-size: 14px;
+	text-transform: uppercase;
+ 	color: #000; /* цвет текста */
+ 	background: #fcac45; /* фон кнопки */
+ 	padding: 7px 30px; /* отступ от текста */
+ 	outline: none; /* убирать контур в Mozilla */
+	border: none;
+}
+
+input#button_sign_in:hover {
+	background: #ea8d15;
+	} /* при наведении курсора мышки */
+
+input#button_log_in{
+    margin-left: 620px;
+    margin-top: -31px;
+	position: absolute;
+	font-size: 14px;
+	text-transform: uppercase;
+ 	color: #000; /* цвет текста */
+ 	text-decoration: none; /* убирать подчёркивание у ссылок */
+ 	user-select: none; /* убирать выделение текста */
+ 	background: #fcac45; /* фон кнопки */
+ 	padding: 7px 30px; /* отступ от текста */
+ 	outline: none; /* убирать контур в Mozilla */
+	border: none;
+}
+
+input#button_log_in:hover {
+	background: #ea8d15;
+}
+
+a.rollover{
+		margin-top: 29px;
+		margin-left: 1%;
+        background: url(user1.png); /* Путь к файлу с исходным рисунком  */
+        display: block; /*  Рисунок как блочный элемент */
+        width: 26px; /* Ширина рисунка */
+        height: 26px; /*  Высота рисунка */
+       }
+a.rollover:hover {
+        background: url(user.png);
+}
+
+a.rollover2{
+		margin-top: 29px;
+		margin-left: 1%;
+        background: url(user.png); /* Путь к файлу с исходным рисунком  */
+        display: block; /*  Рисунок как блочный элемент */
+        width: 26px; /* Ширина рисунка */
+        height: 26px; /*  Высота рисунка */
+       }
+a.rollover2:hover {
+        background: url(user1.png);
+}
+
+.header__logo{
+	text-transform: uppercase;
+	color: #ffffff; 
+	font-weight: 800;
+	font-size: 24px;
+	cursor: pointer;
+	margin-top: 25px;
+	margin-left: 4%;
+}
+.topnav a{
+	color: #ffffff;
+	text-align: center;
+	padding: 12px 16px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.topnav a:hover{
+	border-bottom: 1px solid #fcac45;
+}
+.topnav .icon{
+	display: none;
+}
+
+main{
+	background: #0A111B;
+}
+
+#registration{
+	width: 100%;
+	padding: 35px 0 35px 20%;
+}
+
+.form-group {
+	 position: relative;
+	 padding-top: 1rem;
+}
+
+input{
+	font-size: 15px;
+	outline-color: #fcac45;
+	outline-width: 30px;
+}
+
+.login-lb{
+	color: #fcac45;
+	position: absolute;
+	left: 308px;
+	top: 9px;
+	opacity: 1;
+	transform: translateY(0);
+	transition: all 0.2s ease-out;
+}
+
+
+.password{
+	margin-left: 20px;
+}
+
+label.password-lb{
+	color: #fcac45;
+	 position: absolute;
+	 left: 536px;
+	 top: 9px;
+	 opacity: 1;
+	 transform: translateY(0);
+	 transition: all 0.2s ease-out;
+}
+
+a.vk{
+	margin-top: -50px;
+    margin-left: 820px;
+    background: url(vk.png);
+    display: flex;
+    width: 64px;
+    height: 64px;	
+}
+
+a.vk:hover  {
+  display: block;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+a.google{
+	margin-top: -60px;
+    margin-left: 910px;
+    background: url(google-plus.png);
+    display: flex;
+    width: 64px;
+    height: 64px;	
+}
+
+a.google:hover  {
+  display: block;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+a.facebook{
+	margin-top: -64px;
+    margin-left: 1005px;
+    background: url(facebook.png);
+    display: flex;
+    width: 64px;
+    height: 64px;
+}
+
+a.facebook:hover  {
+  display: block;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+a.forgot{
+	margin-left: 229px;
+	color: #A9A9A9;
+}
+
+a.forgot:hover{
+	border-bottom: 1px solid #fcac45;
+}
+
+.main__blog{
+  display:flex;
+}
+
+.main_in_blog{
+	width: 1295px;
+}
+
+.main__article{
+	display: grid;
+    grid-template-columns: repeat(2, 600px);
+    grid-template-rows: repeat(4, 250px);
+    width: 1350px;
+    padding-left: 53px;
+    margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.article{
+	background-color: #fff;
+    -webkit-box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    min-height: 220px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 20px 0px;
+    z-index: 50;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin: 15px 14px;
+    height: 220px;
+    width: 547px;
+	flex-direction: inherit;
+}
+
+.img_cover{
+	object-fit: cover;
+	width: 120px;
+	height: 110px;
+	margin-right: 20px;
+}
+
+.article_date{
+	font-size: 12px;
+	color: #8A8A8A;
+	text-transform: lowercase;
+}
+
+.article_id{
+	font-size: 16px;
+	color: #0A111B;
+	font-weight: bolder;
+}
+
+.article_border{
+	display: flex;
+	position: absolute;
+	width: 515px;
+	margin-bottom: 30px;
+	border-top: 1px solid #D2D7DB;
+	margin-top: 143px;
+}
+
+
+.last__comments {
+	background: #EEF0F2;
+	width: 275px;
+	color: #0A111B;
+}
+
+.comment{
+	border-bottom: 1px solid #D2D7DB;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	padding: 0 20px 20px;
+}
+
+.live_comments-title{
+	font-size: 16px;
+    color: #0A111B;
+    font-weight: bold;
+    padding: 17.5px 20px;
+    cursor: pointer;
+}
+
+#user_in_last_comment{
+	font-size: 14px;
+	color: #0A111B;
+	font-weight: bold;
+}
+
+a#user_in_last_comment:hover {
+	text-decoration: underline; /* Добавляем подчеркивание */
+}
+
+
+.footer{
+	background: #0A111B;
+	display: flex;
+    height: 60px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.footer__info{
+	color: white;
+	margin-left: 30px;
+    margin-right: 460px;
+	align-items: center;
+	font-size: 12px;
+	margin-top: -5px;
+}
+
+.footer__socials{
+	color: white;
+	margin-right: 460px;
+	font-size: 12px;
+	margin-top: -5px;
+}
+
+.footer_rss{
+	color: white;
+	display: inline-flex;
+	align-items: center;
+}
+
+.image_for_footer_rss{
+	height: 33px;
+	width: 33px;
+	overflow: hidden;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.image_for_footer_rss:hover{
+	opacity: 0.7;
+}
+
+
+
+@media screen and (max-width: 1010px) {
+	.topnav a {
+		display: none;
+	}
+
+	.topnav a.icon {
+		float: right;
+		margin-top: -17px;
+		display: block;
+		color: #ffffff;
+		font-size: 25px;
+	}
+
+	nav {
+		width: 100%;
+	}
+
+	.topnav.responsive {
+		position: relative;
+		top: 50px;
+		left: -200px;
+	}
+
+	header .topnav.responsive {
+		height: 340px;
+	}
+
+	.topnav.responsive a.icon {
+		position: absolute;
+		top: -50px;
+		left: -200px;
+	}
+
+	.topnav.responsive a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+}
+
+.slider {
+	  /* устанавливаем относительное позиционирование элементу */
+		position: relative;
+		display: inline-block;
+		width: 1147px;
+		height: 647px;
+		margin-top: 57px;
+		margin-left: 67px;
+		background: #000000;
+		}
+
+	.img_in_slider{
+		opacity: 0.4;
+		width: 1147px;
+		height: 647px;
+	}
+
+	.slider__items {
+	  /* устанавливаем относительное позиционирование элементу */
+	  position: relative;
+	  /* устанавливаем элементу ширину, равную 100% */
+	  overflow: hidden;
+	  width: 1147px;
+	  height: 647px;
+	}
+
+	.slider__item {
+	  /* устанавливаем относительное позиционирование элементу */
+	  position: relative;
+	  /* отключаем по умолчанию отображение всех слайдов */
+	  display: none;
+	  /* устанавливаем элементу ширину, равную 100% */
+	  width: 100%;
+	  /* длительность анимации трансформации */
+	  transition: transform 0.6s ease;
+	  /* не показывать обратную сторону трансформируемого элемента */
+	  backface-visibility: hidden;
+	}
+
+	.slider__item_active,
+	.slider__item_next,
+	.slider__item_prev {
+	  /* отображаем слайд, если он имеет один из этих классов */
+	  display: block;
+	}
+
+	.slider__item_next,
+	.slider__item_prev {
+	  /* устанавливаем абсолютное позиционирование для элемента, на который будет сменяться слайд (на время трансформации) */
+	  position: absolute;
+	  /* устанавливаем положение элемента, т.е. координату top */
+	  top: 0;
+	}
+
+	.slider__item_next.slider__item_left,
+	.slider__item_prev.slider__item_right {
+	  /* сдвигаем элемент на 0 по горизонтали */
+	  transform: translateX(0);
+	}
+
+	.slider__item_next,
+	.slider__item_right.slider__item_active {
+	  /* сдвигаем элемент на 100% по горизонтали */
+	  transform: translateX(100%);
+	}
+
+	.slider__item_prev,
+	.slider__item_left.slider__item_active {
+	  /* сдвигаем элемент на -100% по горизонтали */
+	  transform: translateX(-100%);
+	}
+
+	/* элементы управления (назад и вперёд) слайдером */
+
+	.slider__control {
+	  position: absolute;
+	  top: 0;
+	  bottom: 0;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  width: 10%;
+	  color: #fff;
+	  text-align: center;
+	  opacity: 0.6;
+	}
+
+	.slider__control:hover,
+	.slider__control:focus {
+	  color: #fff;
+	  text-decoration: none;
+	  outline: 0;
+	  opacity: .9;
+	}
+
+	.slider__control_prev {
+	  left: 0;
+	}
+
+	.slider__control_next {
+	  right: 0;
+	}
+
+	.slider__control::before {
+	  content: '';
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  background: transparent no-repeat center center;
+	  background-size: 100% 100%;
+	}
+
+	.slider__control_prev::before {
+	  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+	}
+
+	.slider__control_next::before {
+	  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+	}
+
+	/* индикаторы слайдера */
+
+	.slider__indicators {
+	  position: absolute;
+	  right: 0;
+	  bottom: 10px;
+	  left: 0;
+	  z-index: 15;
+	  display: flex;
+	  justify-content: center;
+	  padding-left: 0;
+	  margin-right: 15%;
+	  margin-left: 15%;
+	  list-style: none;
+	}
+
+	.slider__indicator {
+	  position: relative;
+	  flex: 0 1 auto;
+	  width: 30px;
+	  height: 3px;
+	  margin-right: 3px;
+	  margin-left: 3px;
+	  text-indent: -999px;
+	  cursor: pointer;
+	  background-color: rgba(255, 255, 255, 0.5);
+	  border-radius: 6px;
+	}
+
+	.slider__indicator::before {
+	  position: absolute;
+	  top: -10px;
+	  left: 0;
+	  display: inline-block;
+	  width: 100%;
+	  height: 10px;
+	  content: "";
+	}
+
+	.slider__indicator::after {
+	  position: absolute;
+	  bottom: -10px;
+	  left: 0;
+	  display: inline-block;
+	  width: 100%;
+	  height: 10px;
+	  content: "";
+	}
+
+	.slider__indicator_active {
+  		background-color: #fff;
+	}
+
+/* Article page */
+.p_article_image{
+	color: #000000;
+	height: 500px;
+	background-position: center;
+    background-size: cover;
+    position: relative;
+    float: left;
+    width: 100%;
+    padding: 20px 0 100px;
+    margin-bottom: 30px;
+}
+

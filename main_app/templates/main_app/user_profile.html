@@ -1,0 +1,8 @@
+{% extends 'main_app/basic_page.html' %}
+{% block content %}
+Аватарка: <img src="{{user.avatar.url}}" style="height: 110px; width: 110px"> <br>
+Имя: {{user.first_name}} <br>
+Фамилия: {{user.last_name}} <br>
+Username: {{user.username}} <br>
+<a href="/edit/profile">Изменить профиль</a>
+{% endblock %}

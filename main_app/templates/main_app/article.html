@@ -1,0 +1,198 @@
+{% extends 'main_app/basic_page.html' %}
+{% block content %}
+<div>
+    <div class="p_article_image"
+         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ article.image.url }}');
+        align-items: center;">
+        <h1><span class="nobar" style="
+            color: white;
+            font-size: 47px;
+            line-height: 55px;
+            display: block;
+            position: relative;
+            float: left;
+            margin-bottom: 35px;
+            width: 906px;
+            margin: 306px;
+            text-align: center;
+            font-family: 'Russo One', sans-serif;">
+            {{article.title}}</span>
+        </h1>
+    </div>
+</div>
+<div class="blog" style="width: 906px; margin: auto;">
+        <div class="blog_info" style="
+                                        line-height: 1.4em;
+                                        font-size: 16px;
+                                        padding: 18px 0;
+                                        border-bottom: 1px solid #d2d7db;">
+            <span class="data" style="
+                                    display: inline-block;
+                                    color: #999999;">15 Октября 2019</span>
+            <a href="/profile/{{article.author.id}}" class="blog_author_name" style="display: inline-block;
+                                                                color: #e2223f;
+                                                                font-weight: 700;
+                                                                text-decoration: none;
+                                                                border-bottom: 1px solid #f0d5d8;
+                                                                margin-left: 35px;">{{article.author.get_full_name}}</a>
+            <div class="re" style="display: block;
+            float: right;
+            border-radius: 15px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            background-color: #eef0f2;
+            color: #999999;
+            padding: 13px 13px 12px 13px;
+            line-height: 14px;
+            height: 14px;
+            margin-top: -11px;">
+                <strong style="display: block;">Комментариев: 14</strong>
+            </div>
+            <div class="re" style="display: block;
+            float: right;
+            border-radius: 15px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            background-color: #eef0f2;
+            color: #999999;
+            padding: 13px 13px 12px 13px;
+            line-height: 14px;
+            height: 14px;
+            margin-top: -11px;
+            margin-right: 20px;">
+                <strong style="display: block;">Нравится: 16</strong>
+            </div>
+        </div>
+
+            <div class="blog_text" style="padding: 40px 0;
+                                            color: #333333;
+                                            font-size: 16px;
+                                            line-height: 24px;">
+                  <p style="font-size: 20px;
+                    line-height: 1.7;
+                    font-family: 'TT Norms', Arial;">
+                                {{article.text}}
+                  </p>
+            </div>
+        <div class="authholder" style="
+            border-left: 1px solid #d2d7db;
+            border-right: 1px solid #d2d7db;
+            width: 100%;
+            display: flex;
+            margin-bottom: 40px;">
+            <div class="author" style="border-top: 1px solid #d2d7db;
+            border-bottom: 1px solid #d2d7db;
+    padding: 35px 0 10px;
+    float: left;
+    padding-left: 30px;
+    padding-right: 30px;
+        padding-bottom: 35px;
+    width: 50%;
+    box-sizing: border-box;">
+                <div class="img" style="display: table-cell;
+    vertical-align: top;
+    position: relative;">
+                    <img src="{{article.author.avatar.url}}" style="display: block;
+                margin-right: 35px;
+                width: 125px;
+                height: 125px;
+                border-radius: 63px;">
+                </div>
+                <div class="body" style="display: table-cell;
+    vertical-align: top;
+    position: relative;">
+                    <div class="name" style="font-size: 17px;
+    font-weight: 700;">Автор:
+                        <strong style="    display: block;
+    font-weight: normal;
+    line-height: 1.7em;
+    margin-bottom: 20px;
+    margin-top: 4px;">{{article.author.get_full_name}}</strong>
+                    </div>
+                    <a href="/blog/author_pavel-molyanov/" class="more" style="font-size: 15px;
+    line-height: 1.3em;
+    width: 11em;
+    bottom: 0.5em;
+    text-decoration: underline;
+    border: none;
+color: #e2223f;">Все статьи этого автора</a>
+                </div>
+            </div>
+            <div class="authmats" style="padding: 35px 0 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 35px;
+    float: left;
+    width: 50%;
+    border-top: 1px solid #d2d7db;
+    border-left: 1px solid #d2d7db;
+    border-bottom: 1px solid #d2d7db;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;;">
+                <strong style="font-size: 16px;
+    margin-bottom: 4px;
+    display: block;">Последние статьи автора:</strong>
+                    <p style="font-size: 14px;
+    margin-bottom: 0.5em;
+    line-height: 1.7em;"><a href="/blog/kak-sostavit-gramotnoe-tekhzadanie-na-razrabotku-sayta.html">Как составить грамотное техзадание на разработку сайта</a></p>
+                    <p style="font-size: 14px;
+    margin-bottom: 0.5em;
+    line-height: 1.7em;"><a href="/blog/referalnyy-marketing-kak-privlekat-klientov-s-pomoshchyu-klientov.html">Реферальный маркетинг: как привлекать клиентов с помощью клиентов</a></p>
+            </div>
+    </div>
+    <div class="comment_count" style="
+    width: 910px;
+    font-weight:bold;
+    font-size: 15px;
+    color: #2a2e2e;
+    margin-top: 80px;
+    padding-bottom: 13px;
+    border-bottom: 2px solid #d2d7db;">COMMENTS</div>
+    {% if request.user.is_authenticated %}
+    <div class="comment_new" style="margin-top: 15px; display: flex;">
+        <img src="{{user.avatar.url}}" style="height: 58px; width: 58px; margin-right: 12px; border-radius: 7px">
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            <div class="comment_input_and_save">
+
+                    <textarea name="text" placeholder="Input comment..." style="width: 836px; height: 57px;"></textarea>
+
+                <button type="submit" class="save btn btn-default">Send</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% for com in comment%}
+    <div class="comment_in_article" style="display: flex; margin-top: 30px; margin-left: 15px;">
+        <img src="{{com.author.avatar.url}}" style="height: 58px; width: 58px; margin-right: 12px; border-radius: 7px">
+        <div class="comment_info" style="overflow: hidden; margin-top: 3px">
+            <div class="comment_image_date" style="
+            display: flex;
+            line-height: 11px;
+            font-size: 13px;
+            margin-bottom: 4px;">
+            <a href="/profile/{{com.author.id}}" style="
+                            color: #e2223f;
+                            line-height: 10px;
+                            font-size: 14px;
+                            margin-right: 5px;
+                            margin-bottom: 3px;">
+                {{com.author.get_full_name}}
+            </a>
+            <span class="bullet time-ago-bullet" aria-hidden="true" style="
+            margin-right: 5px;
+            color: #c2c6cc;
+            ">
+            •
+            </span>
+            <p style="font-size: 12px; color: #868686;">{{com.date}}</p>
+            </div>
+            <p style="font-size: 15px; width: 97%;">{{com.text}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

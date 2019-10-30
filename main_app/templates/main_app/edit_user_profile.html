@@ -1,0 +1,24 @@
+{% extends 'main_app/basic_page.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <label>Введите login</label><br>
+            <input type="text" name="username" value="{{user.username}}" />
+        </p>
+        <p>
+            <label>Введите фамилию</label><br>
+            <input type="text" name="last_name" value="{{user.last_name}}" />
+        </p>
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="first_name" value="{{user.first_name}}" />
+        </p>
+        <img src="{{user.avatar.url}}" style="width: 110px; height: 110px">
+        <p>
+            <label for="id_image">Image:</label>
+            <input type="file" name="image" accept="image/*" id="id_image">
+        </p>
+        <input type="submit" value="Сохранить" >
+</form>
+{% endblock %}

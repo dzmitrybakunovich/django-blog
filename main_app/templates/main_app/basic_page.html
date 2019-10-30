@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyBlog</title>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'world.png' %}"/>
+</head>
+<body>
+        <script type="text/javascript">
+        function openbox(id){
+            display = document.getElementById(id).style.display;
+            if(display == 'none'){
+               document.getElementById(id).style.display='block';
+            }else{
+              document.getElementById(id).style.display='none';
+           }
+        }
+        </script>
+    <header>
+        <div class="header__logo"><p>MyBlog</p></div>
+        {% if request.user.is_authenticated %}
+        <nav style="margin-top: 29px; margin-left: 56%;">
+        {% else %}
+        <nav style="margin-top: 29px; margin-left: 62%;">
+        {% endif %}
+            <div class="topnav" id="MyTopnavs">
+                <a href="/">BLOG</a>
+                <a href="/about">ABOUT</a>
+                <a href="">CONTACT</a>
+                {% if request.user.is_authenticated %}
+                    <a href="">RATING</a>
+                    <a href="/profile/{{ user.id}}">PROFILE</a>
+                {% else %}
+                    <a href="">RATING</a>
+                {% endif %}
+                    <a href="" id="menu" class="icon">&#9776</a>
+            </div>
+        </nav>
+            {% if request.user.is_authenticated %}
+                <a href="/accounts/logout" class="rollover2"></a>
+            {% else %}
+                <a href="#" class="rollover" onClick = "openbox('registration');"></a>
+            {% endif %}
+    </header>
+    <main>
+        <div class="form-group" id = "registration" style="display: none;">
+            {% include "registration/login.html" %}
+            {% if form.errors %}
+              <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <input type="submit" value="LOG IN" id = "button_log_in" />
+            <a href="{% url 'social:begin' 'vk-oauth2' %}" class="vk"></a>
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="google"></a>
+            <a href="#" class="facebook"></a>
+            <a href="{% url 'password_reset' %}" class = "forgot">FORGOT PASSWORD</a>
+        </div>
+    </main>
+
+        {% block content %}
+        <div class = "main__blog">
+            <div class="main_in_blog">
+                <div class="main__article">
+                {% for article in articles %}
+                    <div class="article">
+                        {% if article.image %}
+                        <img src="{{ article.image.url }}" class="img_cover">
+                        {% endif %}
+                        <div class="article_and_image" style="display: flex;
+                                                        flex-direction: column;
+                                                        height: max-content;">
+                            <a class="article_date">{{article.date}}</a><br/>
+                            <a class="article_id" href="/articles/{{article.id}}">{{article.title}}</a>
+                        </div>
+                        <div class="article_border"></div>
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if articles.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ articles.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ articles.number }} of {{ articles.paginator.num_pages }}.
+                        </span>
+
+                        {% if articles.has_next %}
+                            <a href="?page={{ articles.next_page_number }}">NEXT ></a>
+                            <a href="?page={{ articles.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'new_post' %}">Add new article</a>
+                {% endif %}
+            </div>
+            <div class="last__comments">
+                <p class="live_comments-title">LAST COMMENTS:</p>
+                {% for com in comment %}
+                    <div class="comment">
+                        <a href="/profile/{{com.author.id}}" id="user_in_last_comment">{{com.author.get_full_name}}</a><br/>
+                        <a style="font-size: 13px;">{{com.text}}</a>
+                        <br/>
+                        <br/>
+                        <a href="/articles/{{com.article.id}}" id="" style="font-size: 13px;
+                                                line-height: 1.4;
+                                                color: #E01A42;
+                                                text-decoration: underline;
+                                                margin-bottom: 0;">{{com.article.title}}</a>
+                    </div>
+            {% endfor %}
+            </div>
+        </div>
+        {% endblock %}
+    <div class="footer" style="display: flex; height: 60px;">
+        <div class="footer__info"><a href="" class="top-menu"
+        style="color: white;">Subscribe to notifications</a></div>
+        <div class="footer__socials">© 2019 Dmitry Bakunovich Blog, Inc</div>
+        <div class="footer_rss">
+            <a style="padding-bottom: 0; margin-right: 10px;margin-top: -5px;">Write to us:</a>
+            <a href="https://vk.com/write100400126">
+                <img src="{% static 'css/vk-in-cycle.png' %}" class="image_for_footer_rss">
+            </a>
+            <a href="mailto:dv.bakunovich@gmail.com?subject=Тема&body=Текст">
+                <img src="{% static 'css/google-in-cycle.png' %}" class="image_for_footer_rss">
+            </a>
+            <a href="https://linkedin.com/in/dmitrybakunovich ">
+                <img src="{% static 'css/linkedin-in-cycle.png' %}" class="image_for_footer_rss">
+            </a>
+        </div>
+    </div>
+</body>
+</html>
