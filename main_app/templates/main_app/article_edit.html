@@ -1,0 +1,12 @@
+{% extends 'main_app/basic_page.html' %}
+
+{% block content %}
+<div class="new_article" style="height: 700px">
+    <h1>New post</h1>
+    <form method="POST" class="post-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</div>
+{% endblock %}
