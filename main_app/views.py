@@ -70,11 +70,13 @@ def new_article(request):
 
 
 def user_profile(request, user_id=1):
+    user = CustomUser.objects.get(id=user_id)
     return render(
         request,
         'main_app/user_profile.html',
         {
-            'user': CustomUser.objects.get(id=user_id),
+            'is_my_profile': request.user.id == user.id,
+            'user': user,
         }
     )
 
