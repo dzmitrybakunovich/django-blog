@@ -582,3 +582,257 @@ a#user_in_last_comment:hover {
     margin-bottom: 30px;
 }
 
+.p_article_image{
+	 align-items: center;
+}
+
+.nobar{
+	color: white;
+	font-size: 47px;
+	line-height: 55px;
+	display: block;
+	position: relative;
+	float: left;
+	margin-bottom: 35px;
+	width: 906px;
+	margin: 306px;
+	text-align: center;
+	font-family: 'Russo One', sans-serif;
+}
+
+.blog{
+	width: 906px;
+	margin: auto;
+}
+
+.quantity_comment{
+    display: block;
+    float: right;
+    border-radius: 15px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #eef0f2;
+    color: #999999;
+    padding: 13px 13px 12px 13px;
+    line-height: 14px;
+    height: 14px;
+    margin-top: -11px;
+}
+
+.quantity_likes{
+    display: block;
+    float: right;
+    border-radius: 15px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #eef0f2;
+    color: #999999;
+    padding: 13px 13px 12px 13px;
+    line-height: 14px;
+    height: 14px;
+    margin-top: -11px;
+    margin-right: 20px;
+}
+
+.blog_info{
+	line-height: 1.4em;
+	font-size: 16px;
+	padding: 18px 0;
+	border-bottom: 1px solid #d2d7db;
+}
+
+.blog_date{
+	display: inline-block;
+	color: #999999;
+}
+
+.blog_author_name{
+	display: inline-block;
+	color: #e2223f;
+	font-weight: 700;
+	text-decoration: none;
+	border-bottom: 1px solid #f0d5d8;
+	margin-left: 35px;
+}
+
+.blog_text{
+	padding: 40px 0;
+	color: #333333;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.blog_text p{
+    font-size: 20px;
+    line-height: 1.7;
+    font-family: 'TT Norms', Arial;
+}
+
+.authholder{
+	border-left: 1px solid #d2d7db;
+	border-right: 1px solid #d2d7db;
+	width: 100%;
+	display: flex;
+	margin-bottom: 40px;
+}
+
+.author{
+	border-top: 1px solid #d2d7db;
+	border-bottom: 1px solid #d2d7db;
+	padding: 35px 0 10px;
+	float: left;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 35px;
+	width: 50%;
+	box-sizing: border-box;
+}
+
+.author_img{
+	display: table-cell;
+    vertical-align: top;
+    position: relative;
+}
+
+.author_img img{
+	display: block;
+	margin-right: 35px;
+	width: 125px;
+	height: 125px;
+	border-radius: 63px;
+}
+
+.body{
+	display: table-cell;
+    vertical-align: top;
+    position: relative;
+}
+
+.name{
+	font-size: 17px;
+    font-weight: 700;
+}
+
+.name strong{
+	display: block;
+    font-weight: normal;
+    line-height: 1.7em;
+    margin-bottom: 20px;
+    margin-top: 4px;
+}
+
+.more{
+	font-size: 15px;
+    line-height: 1.3em;
+    width: 11em;
+    bottom: 0.5em;
+    text-decoration: underline;
+	border: none;
+	color: #e2223f;
+}
+
+.authmats{
+	padding: 35px 0 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 35px;
+    float: left;
+    width: 50%;
+    border-top: 1px solid #d2d7db;
+    border-left: 1px solid #d2d7db;
+    border-bottom: 1px solid #d2d7db;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.authmats strong{
+	font-size: 16px;
+	margin-bottom: 4px;
+	display: block;
+}
+
+.authmats p{
+	font-size: 14px;
+    margin-bottom: 0.5em;
+    line-height: 1.7em;
+}
+
+.comment_count{
+    width: 910px;
+    font-weight:bold;
+    font-size: 15px;
+    color: #2a2e2e;
+    margin-top: 80px;
+    padding-bottom: 13px;
+    border-bottom: 2px solid #d2d7db;
+}
+
+.comment_new{
+	margin-top: 15px;
+	display: flex;
+}
+
+.comment_new img{
+	height: 58px;
+	width: 58px;
+	margin-right: 12px;
+	border-radius: 7px;
+}
+
+.comment_in_article{
+	display: flex;
+	margin-top: 30px;
+	margin-left: 15px;
+}
+
+.comment_in_article img{
+	height: 58px;
+	width: 58px;
+	margin-right: 12px;
+	border-radius: 7px;
+}
+
+.comment_info{
+	overflow: hidden;
+	margin-top: 3px;
+}
+
+.comment_text{
+	font-size: 15px;
+	width: 97%;
+}
+
+.comment_image_date{
+	display: flex;
+	line-height: 11px;
+	font-size: 13px;
+	margin-bottom: 4px;
+}
+
+.comment_image_date a{
+	color: #e2223f;
+	line-height: 10px;
+	font-size: 14px;
+	margin-right: 5px;
+	margin-bottom: 3px;
+}
+.comment_image_date span{
+	margin-right: 5px;
+	color: #c2c6cc;
+}
+
+.comment_image_date p{
+	font-size: 12px;
+	color: #868686;
+}
+
+.comment_input_and_save textarea{
+	width: 836px;
+	height: 57px;
+}
+
+.comment_body{
+	margin-bottom: 80px;
+}
