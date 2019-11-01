@@ -1,9 +1,9 @@
-from django.conf.urls import include, url
-from . import views
 from django.conf import settings
+from django.conf.urls import url
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from main_app import views
 
 urlpatterns = [
     url('^$', views.main_page, name='index'),
