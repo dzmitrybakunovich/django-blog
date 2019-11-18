@@ -32,6 +32,8 @@ class ArticleAdmin(admin.ModelAdmin):
     fields = [
         'title',
         'image',
+        'short_description',
+        'author',
         'text',
         'date',
     ]

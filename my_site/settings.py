@@ -19,14 +19,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'main_app',
+    'rest_framework',
+    'ckeditor',
+    'social_django',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_app',
-    'social_django',
 ]
 
 AUTH_USER_MODEL = 'main_app.CustomUser'
@@ -150,3 +153,30 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 # GOOGLE
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '599591969737-j0pmc78erc272ta3heib2qn13nbk9b0s.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'DBoDsenlYGGpHoZ8jzt3wJbB'
+
+# CKEDITOR SETTING
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [["Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
+                ["Maximize"]],
+        'width': 839,
+        'height': 110,
+        'uiColor': '',
+    },
+}
+
+# RESTFRAMEWORK SETTING
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
