@@ -1,21 +1,27 @@
-from django.shortcuts import render, redirect
-from .models import Article, Comment, CustomUser
 from django.core.paginator import Paginator
-from .forms import ArticleForm, CommentForm
+from django.db.models import Count
+from django.shortcuts import render, redirect
 from django.utils import timezone
+
+from .forms import ArticleForm, CommentForm
+from .models import Article, Comment, CustomUser
 
 
 def main_page(request):
-    all_article = Article.objects.order_by('-date')
+    all_articles = Article.objects.annotate(Count('comment')).order_by('-date')
+    main_articles = Article.objects.annotate(Count('comment')).order_by('-date')[:2]
+    main_article = Article.objects.annotate(Count('comment')).get(id=4)
     AMOUNT_LAST_COMMENTS = 4
-    last_comments = Comment.objects.order_by('-date')[0:AMOUNT_LAST_COMMENTS]
-    paginator = Paginator(all_article, 8)
+    last_comments = Comment.objects.order_by('-date')[:AMOUNT_LAST_COMMENTS]
+    paginator = Paginator(all_articles, 8)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
     return render(
         request,
         'main_app/basic_page.html',
         {
+            'main_article': main_article,
+            'main_articles': main_articles,
             'articles': articles,
             'comment': last_comments,
         },
@@ -76,6 +82,8 @@ def user_profile(request, user_id=1):
         'main_app/user_profile.html',
         {
             'is_my_profile': request.user.id == user.id,
+            'user_article_count': Article.objects.filter(author_id=user_id).count(),
+            'user_comment_count': Comment.objects.filter(author_id=user_id).count(),
             'user': user,
         }
     )
@@ -96,4 +104,22 @@ def edit(request):
         {
             'user': user
         },
+    )
+
+
+def article_created_by_user(request, user_id=1):
+    AMOUNT_LAST_COMMENTS = 4
+    last_comments = Comment.objects.order_by('-date')[0:AMOUNT_LAST_COMMENTS]
+    all_article = Article.objects.annotate(Count('comment')).filter(author_id=user_id).order_by('-date')
+    paginator = Paginator(all_article, 8)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    return render(
+        request,
+        'main_app/articles_created_by_user.html',
+        {
+            'articles': articles,
+            'comment': last_comments,
+            'user': CustomUser.objects.get(id=user_id),
+        }
     )

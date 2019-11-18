@@ -1,4 +1,6 @@
 {% extends 'main_app/basic_page.html' %}
+{% load humanize %}
+{% load static %}
 {% block content %}
 <div>
     <div class="p_article_image"
@@ -49,28 +51,31 @@
             <form method="POST" class="post-form">
                 {% csrf_token %}
                 <div class="comment_input_and_save">
-                    <textarea name="text" placeholder="Input comment..."></textarea>
+                    {{ form.media }}
+                    {{ form.text }}
+
                     <button type="submit" class="save btn btn-default">Send</button>
                 </div>
             </form>
         </div>
         {% endif %}
-
+    {% autoescape off %}
         {% for comment_in_article in comment %}
-        <div class="comment_in_article">
-            <img src="{{comment_in_article.author.avatar.url}}">
-            <div class="comment_info">
-                <div class="comment_image_date">
-                <a href="{% url 'user_profile' comment_in_article.author.id %}">
-                    {{ comment_in_article.author.get_full_name }}
-                </a>
-                <span aria-hidden="true">•</span>
-                <p>{{ comment_in_article.date }}</p>
+            <div class="comment_in_article">
+                <img src="{{comment_in_article.author.avatar.url}}">
+                <div class="comment_info">
+                    <div class="comment_image_date">
+                    <a href="{% url 'user_profile' comment_in_article.author.id %}">
+                        {{ comment_in_article.author.get_full_name }}
+                    </a>
+                    <span aria-hidden="true">•</span>
+                    <p>{{ comment_in_article.date|naturaltime }}</p>
+                    </div>
+                    <p class="comment_text">{{ comment_in_article.text }}</p>
                 </div>
-                <p class="comment_text">{{ comment_in_article.text }}</p>
             </div>
-        </div>
         {% endfor %}
+    {% endautoescape %}
     </div>
 </div>
 {% endblock %}

@@ -1,16 +1,23 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.html import mark_safe
+from ckeditor.fields import RichTextField
 
 
 class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='images/for_profile', null=True, blank=True)
+    last_online = models.DateTimeField(blank=True, null=True)
+
+    def is_online(self):
+        if self.last_online:
+            return (timezone.now() - self.last_online) < timezone.timedelta(minutes=5)
+        return False
 
     def __str__(self):
         return self.email
 
     def image_in_admin(self):
-        return mark_safe(f'<img src="/media/{self.avatar}" width="110" height="110" />')
+        return mark_safe(f'<img src="/media/{self.avatar}" width="110" height="110" style="object-fit: cover;" />')
 
     image_in_admin.short_description = 'profile image'
 
@@ -21,6 +28,7 @@ class Article(models.Model):
     title = models.CharField(max_length=150)
     image = models.ImageField(upload_to='images/for_article', null=True, blank=True)
     text = models.TextField()
+    short_description = models.CharField(max_length=120, null=True, blank=True)
     date = models.DateTimeField()
     likes = models.IntegerField(default=0)
     visible = models.BooleanField(default=1)
@@ -33,7 +41,7 @@ class Article(models.Model):
 class Comment(models.Model):
     class Meta:
         db_table = 'comment'
-    text = models.TextField()
+    text = RichTextField()
     date = models.DateTimeField(blank=True, null=True)
     article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE)
     author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
