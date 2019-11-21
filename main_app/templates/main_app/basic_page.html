@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'world.png' %}"/>
 </head>
-<body>
+    <body>
         <script type="text/javascript">
         function openbox(id){
             display = document.getElementById(id).style.display;
@@ -71,8 +71,8 @@
         </div>
         <a href="{% url 'password_reset' %}" class = "forgot">FORGOT PASSWORD</a>
     </div>
-</main>
-    <div class="white_bottom"></div>
+    </main>
+        <div class="white_bottom"></div>
     {% block content %}
     {% block article_create %}
     <div class = "main__blog">
@@ -123,5 +123,5 @@
                 </a>
             </div>
         </div>
-</body>
+    </body>
 </html>

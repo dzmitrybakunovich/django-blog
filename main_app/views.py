@@ -30,6 +30,7 @@ def main_page(request):
 
 # page article with comments
 def page_article(request, article_id=1):
+    AMOUNT_LAST_ARTICLES = 2
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
