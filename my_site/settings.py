@@ -168,7 +168,7 @@ CKEDITOR_CONFIGS = {
                  'JustifyRight', 'JustifyBlock'],
                 ["Image", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
                 ["Maximize"]],
-        'width': 839,
+        'width': 820,
         'height': 110,
         'uiColor': '',
     },

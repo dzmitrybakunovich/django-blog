@@ -2,80 +2,102 @@
 {% load humanize %}
 {% load static %}
 {% block content %}
-<div>
-    <div class="p_article_image"
-         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ article.image.url }}');"
-    >
-        <h1><span class="nobar">{{article.title}}</span></h1>
+<div class="p_article_image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ article.image.url }}');">
+    <div class="text_in_article_imange" style="
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width: 100%">
+        <h1 style="
+        width: 906px;
+        margin-left: auto;
+        margin-right: auto;
+        ">{{article.title}}</h1>
     </div>
 </div>
-<div class="blog" >
-        <div class="blog_info">
-            <span class="blog_data">{{ article.date.date }}</span>
-            <a href="{% url 'user_profile' article.author.id %}" class="blog_author_name">
-                {{ article.author.get_full_name }}
-            </a>
-            <div class="quantity_comment">
-                <strong>Комментариев: {{ comment.count }}</strong>
-            </div>
-            <div class="quantity_likes">
-                <strong>Нравится: 16</strong>
-            </div>
-        </div>
-            <div class="blog_text">
-                  <p>{{ article.text }}</p>
-            </div>
-        <div class="authholder">
-            <div class="author">
-                <div class="author_img">
-                    <img src="{{ article.author.avatar.url }}">
-                </div>
-                <div class="body">
-                    <div class="name">Автор:
-                        <strong>{{ article.author.get_full_name }}</strong>
-                    </div>
-                    <a href="Add url" class="more">Все статьи этого автора</a>
-                </div>
-            </div>
-            <div class="authmats">
-                <strong>Последние статьи автора:</strong>
-                    <p><a href="Add url">Текст</a></p>
-                    <p><a href="Add url">Текст</a></p>
-            </div>
+    <div class="background_for_p__image" style="
+        width: 100%;
+        height: 620px;">
     </div>
-    <div class="comment_body">
-        <div class="comment_count">COMMENTS:</div>
-        {% if request.user.is_authenticated %}
-        <div class="comment_new">
-            <img src="{{user.avatar.url}}">
-            <form method="POST" class="post-form">
-                {% csrf_token %}
-                <div class="comment_input_and_save">
-                    {{ form.media }}
-                    {{ form.text }}
+    <div class="qwertyul"style="
+    background-color: #264041;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 8px;
+    border-top: 3px solid #ea8d15;"></div>
 
-                    <button type="submit" class="save btn btn-default">Send</button>
-                </div>
-            </form>
+<div class="blog" >
+
+    <div class="blog_info">
+        <span class="blog_data">{{ article.date.date }}</span>
+        <a href="{% url 'user_profile' article.author.id %}" class="blog_author_name">
+            {{ article.author.get_full_name }}
+        </a>
+        <div class="quantity_comment">
+            <strong>COMMENTS: {{ comment.count }}</strong>
         </div>
-        {% endif %}
-    {% autoescape off %}
-        {% for comment_in_article in comment %}
-            <div class="comment_in_article">
-                <img src="{{comment_in_article.author.avatar.url}}">
-                <div class="comment_info">
-                    <div class="comment_image_date">
-                    <a href="{% url 'user_profile' comment_in_article.author.id %}">
-                        {{ comment_in_article.author.get_full_name }}
-                    </a>
-                    <span aria-hidden="true">•</span>
-                    <p>{{ comment_in_article.date|naturaltime }}</p>
-                    </div>
-                    <p class="comment_text">{{ comment_in_article.text }}</p>
-                </div>
+        <div class="quantity_likes">
+            <strong>LIKES: 16</strong>
+        </div>
+    </div>
+        <div class="blog_text">
+              <p>{{ article.text }}</p>
+        </div>
+    <div class="authholder">
+        <div class="author">
+            <div class="author_img">
+                <img src="{{ article.author.avatar.url }}">
             </div>
-        {% endfor %}
-    {% endautoescape %}
+            <div class="body">
+                <div class="name">Автор:
+                    <strong>{{ article.author.get_full_name }}</strong>
+                </div>
+                <a href="{% url 'article_created_by_user' article.author.id %}" class="more">All articles of this author</a>
+            </div>
+        </div>
+        <div class="authmats">
+            <strong>Последние статьи автора:</strong>
+                <p><a href="Add url">Текст</a></p>
+                <p><a href="Add url">Текст</a></p>
+        </div>
     </div>
 </div>
+    <div class="comment_body">
+        <div class="comment_count">
+                <div class="comments" style="width: 906px; margin: auto; padding-top: 6px;">COMMENTS:</div>
+        </div>
+        <div class="comment_main" style="width: 906px; margin: auto">
+            {% if request.user.is_authenticated %}
+            <div class="comment_new">
+                <img src="{{user.avatar.url}}">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="comment_input_and_save">
+                        {{ form.media }}
+                        {{ form.text }}
+
+                        <button type="submit" class="save btn btn-default">Send</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            {% autoescape off %}
+                {% for comment_in_article in comment %}
+                    <div class="comment_in_article">
+                        <img src="{{comment_in_article.author.avatar.url}}">
+                        <div class="comment_info">
+                            <div class="comment_image_date">
+                            <a href="{% url 'user_profile' comment_in_article.author.id %}">
+                                {{ comment_in_article.author.get_full_name }}
+                            </a>
+                            <span aria-hidden="true">•</span>
+                            <p>{{ comment_in_article.date|naturaltime }}</p>
+                            </div>
+                            <p class="comment_text">{{ comment_in_article.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endautoescape %}
+        </div>
+    </div>
 {% endblock %}
