@@ -1,27 +1,22 @@
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import get_object_or_404
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
-from ..models import Article
+from ..models import Article, CustomUser
 from .serializers import ArticleSerializer
 
 
-class AddAuthorInArticle(APIView):
-
-    def post(self, request, pk, format=None):
-        article = Article.objects.get(pk=pk)
-        article.author.add(request.user)
-        return Response({'author_add': True})
-
-
-class ArticleList(generics.ListAPIView):
-    queryset = Article.objects.all().order_by('id')
+class ArticleView(ListModelMixin, CreateModelMixin, GenericAPIView):
+    queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
-class ArticleDetail(generics.RetrieveAPIView):
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class SingleArticleView(RetrieveUpdateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
