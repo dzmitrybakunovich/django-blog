@@ -176,7 +176,4 @@ CKEDITOR_CONFIGS = {
 
 # RESTFRAMEWORK SETTING
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
 }

@@ -8,11 +8,6 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='images/for_profile', null=True, blank=True)
     last_online = models.DateTimeField(blank=True, null=True)
 
-    def is_online(self):
-        if self.last_online:
-            return (timezone.now() - self.last_online) < timezone.timedelta(minutes=5)
-        return False
-
     def __str__(self):
         return self.email
 
@@ -27,9 +22,9 @@ class Article(models.Model):
         db_table = 'article'
     title = models.CharField(max_length=150)
     image = models.ImageField(upload_to='images/for_article', null=True, blank=True)
-    text = models.TextField()
+    text = models.TextField(null=True, blank=True)
     short_description = models.CharField(max_length=120, null=True, blank=True)
-    date = models.DateTimeField()
+    date = models.DateTimeField(null=True, blank=True)
     likes = models.IntegerField(default=0)
     visible = models.BooleanField(default=1)
     author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
