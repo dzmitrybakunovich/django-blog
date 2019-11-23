@@ -920,7 +920,7 @@ div.main_user_article:hover div.short_description {
 .main_interactive{
     display: flex;
     padding-top: 30px;
-    padding-bottom: 80px;
+    padding-bottom: 25px;
     position: relative;
     flex-direction: column;
     align-items: flex-end;
