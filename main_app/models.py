@@ -25,8 +25,6 @@ class Article(models.Model):
     text = models.TextField(null=True, blank=True)
     short_description = models.CharField(max_length=120, null=True, blank=True)
     date = models.DateTimeField(null=True, blank=True)
-    likes = models.IntegerField(default=0)
-    visible = models.BooleanField(default=1)
     author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
@@ -40,3 +38,10 @@ class Comment(models.Model):
     date = models.DateTimeField(blank=True, null=True)
     article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE)
     author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
+
+
+class Like(models.Model):
+    user = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
+    article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE, null=True, blank=True)
+    is_liked = models.BooleanField()
+
