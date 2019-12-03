@@ -27,7 +27,6 @@
     border-top: 3px solid #ea8d15;"></div>
 
 <div class="blog" >
-
     <div class="blog_info">
         <span class="blog_data">{{ article.date.date }}</span>
         <a href="{% url 'user_profile' article.author.id %}" class="blog_author_name">
@@ -57,8 +56,9 @@
         </div>
         <div class="authmats">
             <strong>Последние статьи автора:</strong>
-                <p><a href="Add url">Текст</a></p>
-                <p><a href="Add url">Текст</a></p>
+            {% for last_article in last_articles %}
+                <p><a class="more" style="color: #91999b;" href="{% url 'article_detail' last_article.id %}">{{ last_article.title }}</a></p>
+            {% endfor %}
         </div>
     </div>
 </div>
