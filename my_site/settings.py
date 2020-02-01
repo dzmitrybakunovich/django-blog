@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'social_django',
+    'django_extensions',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
