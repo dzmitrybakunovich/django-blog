@@ -116,8 +116,9 @@
         </div>
         <div class="authmats">
             <strong>Последние статьи автора:</strong>
-                <pt><a href="Add url">Текст</a></pt >
-                <p><a href="Add url">Текст</a></p>
+            {% for last_article in last_articles %}
+                <p><a class="more" style="color: #91999b;" href="{% url 'article_detail' last_article.id %}">{{ last_article.title }}</a></p>
+            {% endfor %}
         </div>
     </div>
 </div>

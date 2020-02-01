@@ -62,6 +62,7 @@ def page_article(request, article_id=1):
         'main_app/article.html',
         {
             'form': form,
+            'last_articles': Article.objects.all().filter(author_id=request.user.id)[:AMOUNT_LAST_ARTICLES],
             'article': Article.objects.get(id=article_id),
             'is_liked': Like.objects.filter(article_id=article_id, user_id=request.user.id),
             'all_likes': Like.objects.filter(article_id=article_id, is_liked=True).count(),
