@@ -17,8 +17,7 @@
 </div>
     <div class="background_for_p__image" style="
         width: 100%;
-        height: 620px;">
-    </div>
+        height: 620px;"></div>
     <div class="qwertyul"style="
     background-color: #264041;
     width: 100%;
@@ -27,7 +26,6 @@
     border-top: 3px solid #ea8d15;"></div>
 
 <div class="blog" >
-
     <div class="blog_info">
         <span class="blog_data">{{ article.date.date }}</span>
         <a href="{% url 'user_profile' article.author.id %}" class="blog_author_name">
@@ -37,12 +35,73 @@
             <strong>COMMENTS: {{ comment.count }}</strong>
         </div>
         <div class="quantity_likes">
-            <strong>LIKES: 16</strong>
+            <strong>LIKES: {{ all_likes }}</strong>
         </div>
     </div>
-        <div class="blog_text">
-              <p>{{ article.text }}</p>
-        </div>
+    <div class="blog_text">
+        <p>{{ article.text }}</p>
+        {% if request.user.is_authenticated %}
+            {% if is_liked %}
+                <div class="marks_diagram">
+                    {% for mark in marks %}
+                        {% if mark.is_liked %}
+                            <div class="like_diagram">
+                                <div class="text_in_marks">
+                                    <p class="left">{{ mark.count }}</p>
+                                    <img src="{% static 'css/like.png' %}">
+                                </div>
+                            </div>
+                        {% elif not mark.is_liked and marks|length == 1 %}
+                            <div class="like_diagram">
+                                <div class="text_in_marks">
+                                    <p class="left">0</p>
+                                    <img src="{% static 'css/like.png' %}">
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if forloop.counter == 1 %}
+                        <div class="marks_statistics">
+                            <div class="statistics_like" style="width: {{ like_percent }}%;"></div>
+                            <div class="statistics_dislike" style="width: {{ dislike_percent }}%;"></div>
+                        </div>
+                        {% endif %}
+
+                        {% if not mark.is_liked %}
+                            <div class="dislike_diagram">
+                                <div class="text_in_marks">
+                                    <img src="{% static 'css/dislike.png' %}">
+                                    <p class="right">{{ mark.count }}</p>
+                                </div>
+                            </div>
+                        {% elif mark.is_liked and marks|length == 1 %}
+                            <div class="dislike_diagram">
+                                <div class="text_in_marks">
+                                    <img src="{% static 'css/dislike.png' %}">
+                                    <p class="right">0</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="like_dislike">
+                    <a class="like" href="{% url 'add_like' article_id=article.id %}">
+                        <div class="text_in_marks">
+                            <img src="{% static 'css/like.png' %}">
+                            <p class="like_it">I LIKE IT</p>
+                        </div>
+                    </a>
+                    <a class="dislike" href="{% url 'add_dislike' article_id=article.id %}">
+                        <div class="text_in_marks">
+                            <img src="{% static 'css/dislike.png' %}">
+                            <p class="dislike_it">I DON'T LIKE IT</p>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
     <div class="authholder">
         <div class="author">
             <div class="author_img">
@@ -57,7 +116,7 @@
         </div>
         <div class="authmats">
             <strong>Последние статьи автора:</strong>
-                <p><a href="Add url">Текст</a></p>
+                <pt><a href="Add url">Текст</a></pt >
                 <p><a href="Add url">Текст</a></p>
         </div>
     </div>
@@ -67,7 +126,7 @@
                 <div class="comments" style="width: 906px; margin: auto; padding-top: 6px;">COMMENTS:</div>
         </div>
         <div class="comment_main" style="width: 906px; margin: auto">
-            {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
             <div class="comment_new">
                 <img src="{{user.avatar.url}}">
                 <form method="POST" class="post-form">
@@ -80,24 +139,24 @@
                     </div>
                 </form>
             </div>
-            {% endif %}
-            {% autoescape off %}
-                {% for comment_in_article in comment %}
-                    <div class="comment_in_article">
-                        <img src="{{comment_in_article.author.avatar.url}}">
-                        <div class="comment_info">
-                            <div class="comment_image_date">
+        {% endif %}
+        {% autoescape off %}
+            {% for comment_in_article in comment %}
+                <div class="comment_in_article">
+                    <img src="{{comment_in_article.author.avatar.url}}">
+                    <div class="comment_info">
+                        <div class="comment_image_date">
                             <a href="{% url 'user_profile' comment_in_article.author.id %}">
                                 {{ comment_in_article.author.get_full_name }}
                             </a>
                             <span aria-hidden="true">•</span>
                             <p>{{ comment_in_article.date|naturaltime }}</p>
-                            </div>
-                            <p class="comment_text">{{ comment_in_article.text }}</p>
                         </div>
+                        <p class="comment_text">{{ comment_in_article.text }}</p>
                     </div>
-                {% endfor %}
-            {% endautoescape %}
+                </div>
+            {% endfor %}
+        {% endautoescape %}
         </div>
     </div>
 {% endblock %}

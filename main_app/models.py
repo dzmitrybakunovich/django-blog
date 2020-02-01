@@ -44,4 +44,3 @@ class Like(models.Model):
     user = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
     article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE, null=True, blank=True)
     is_liked = models.BooleanField()
-

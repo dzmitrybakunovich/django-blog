@@ -1,3 +1,5 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
 @font-face {
     font-family: 'TT Norms';
         url('../fonts/TTNorms-Thin.woff2') format('woff2'),
@@ -176,7 +178,7 @@ input{
 .login-lb{
 	color: #fcac45;
 	position: absolute;
-	left: 308px;
+	left: 333px;
 	top: 9px;
 	opacity: 1;
 	transform: translateY(0);
@@ -191,7 +193,7 @@ input{
 label.password-lb{
 	color: #fcac45;
 	 position: absolute;
-	 left: 536px;
+	 left: 561px;
 	 top: 9px;
 	 opacity: 1;
 	 transform: translateY(0);
@@ -1152,4 +1154,115 @@ div.main_user_article:hover div.short_description {
 
 .cke_screen_reader_only{
 	display: none;
+}
+
+/* Like and Dislike */
+.like{
+	height: 100%;
+	width: 50%;
+	border: 1px solid #d2d7db;
+	display: flex;
+	transition: background-color 350ms;
+}
+
+.dislike{
+	height: 100%;
+	width: 50%;
+	border: 1px solid #d2d7db;
+	border-left: 0;
+	display: flex;
+	transition: background-color 250ms;
+}
+
+.like:hover, .dislike:hover{
+	background-color: #e6e6e6;
+}
+
+.like_it{
+	margin-left: 8px;
+	color: #81b220;
+}
+
+.dislike_it{
+	margin-left: 8px;
+	color: #e9160a;
+}
+
+.like_dislike{
+	width: 100%;
+	display: flex;
+	height: 45px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.marks_diagram{
+	display: flex;
+	width: 100%;
+	height: 45px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.like_diagram{
+	height: 100%;
+	width: 20%;
+	border: 1px solid #d2d7db;
+	border-right: 0;
+	display: flex;
+	transition: background-color 350ms;
+}
+
+.dislike_diagram{
+	height: 100%;
+	width: 20%;
+	border: 1px solid #d2d7db;
+	border-left: 0;
+	display: flex;
+	transition: background-color 250ms;
+}
+
+.text_in_marks{
+	margin: auto;
+	font-weight: bold;
+	display: flex;
+}
+
+.text_in_marks img{
+	width: 26px;
+	height: 26px;
+	margin: auto;
+}
+
+.text_in_marks p.left{
+	margin-right: 8px;
+	color: #81b220;
+}
+
+.text_in_marks p.right{
+	margin-left: 8px;
+	color: #e9160a;
+}
+
+.marks_statistics{
+	display:flex;
+	width: 60%;
+	height: 45px;
+	border: 1px solid #d2d7db;
+	border-left: 0;
+	border-right: 0;
+}
+
+.statistics_like{
+	margin: auto;
+	height: 12px;
+	background-color: #81b220;
+}
+
+.statistics_dislike{
+	margin: auto;
+	height: 12px;
+	background-color: #e9160a;
 }
