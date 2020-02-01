@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.utils import timezone
 import random
@@ -11,12 +11,18 @@ from .models import Article, Comment, Like, CustomUser
 def main_page(request):
     AMOUNT_LAST_COMMENTS = 4
     last_comments = Comment.objects.order_by('-date')[:AMOUNT_LAST_COMMENTS]
-    all_articles = Article.objects.annotate(Count('comment')).order_by('-date')
+    all_articles = Article.objects.annotate(
+        like_count=Count('like',filter=Q(like__is_liked=True), distinct=True),
+        comment_count=Count('comment', distinct=True)
+    ).order_by('-date')
     ids_for_articles = Article.objects.values_list('id', flat=True)
     ids_for_articles = list(ids_for_articles)
     AMOUNT_RANDOM_ARTICLES = 3
     random_ids_for_article = random.sample(ids_for_articles, AMOUNT_RANDOM_ARTICLES)
-    main_article = Article.objects.annotate(Count('comment')).filter(id__in=random_ids_for_article)
+    main_article = Article.objects.annotate(
+        like_count=Count('like',filter=Q(like__is_liked=True), distinct=True),
+        comment_count=Count('comment', distinct=True)
+    ).filter(id__in=random_ids_for_article)
     paginator = Paginator(all_articles, 8)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
