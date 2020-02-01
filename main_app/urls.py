@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^profile/(?P<user_id>\d+)$', views.user_profile, name='user_profile'),
     url('post/new', views.new_article, name='new_post'),
     url('edit/profile', views.edit, name='edit_profile'),
+    url(r'^articles/(?P<article_id>\d+)/add_like/$', views.add_like, name='add_like'),
+    url(r'^articles/(?P<article_id>\d+)/add_dislike/$', views.add_dislike, name='add_dislike'),
     url(r'articles/user/(?P<user_id>\d+)$', views.article_created_by_user, name='article_created_by_user'),
 ]
 

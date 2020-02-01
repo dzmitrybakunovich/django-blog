@@ -5,7 +5,7 @@ from django.utils import timezone
 import random
 
 from .forms import ArticleForm, CommentForm
-from .models import Article, Comment, CustomUser
+from .models import Article, Comment, Like, CustomUser
 
 
 def main_page(request):
@@ -34,6 +34,7 @@ def main_page(request):
 
 # page article with comments
 def page_article(request, article_id=1):
+    global dislike_percent
     AMOUNT_LAST_ARTICLES = 2
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -46,6 +47,16 @@ def page_article(request, article_id=1):
             return redirect('article_detail', id=article_id)
     else:
         form = CommentForm()
+
+    all_likes_in_article = Like.objects.filter(article_id=article_id).count()
+    if all_likes_in_article:
+        likes = Like.objects.filter(article_id=article_id, is_liked=True).count()
+        like_percent = likes*100/all_likes_in_article
+        dislikes = Like.objects.filter(article_id=article_id, is_liked=False).count()
+        dislike_percent = dislikes*100/all_likes_in_article
+    else:
+        like_percent = 0
+        dislike_percent = 0
     return render(
         request,
         'main_app/article.html',
@@ -53,8 +64,29 @@ def page_article(request, article_id=1):
             'form': form,
             'last_articles': Article.objects.all().filter(author_id=request.user.id)[:AMOUNT_LAST_ARTICLES],
             'article': Article.objects.get(id=article_id),
+            'is_liked': Like.objects.filter(article_id=article_id, user_id=request.user.id),
+            'all_likes': Like.objects.filter(article_id=article_id, is_liked=True).count(),
+            'marks': Like.objects.filter(article_id=article_id).values('is_liked').annotate(count=Count('is_liked')).order_by('-is_liked'),
+            'like_percent': round(like_percent),
+            'dislike_percent': round(dislike_percent),
             'comment': Comment.objects.filter(article_id=article_id).order_by('-date'),
         }
+    )
+
+
+def add_like(request, article_id):
+    Like.objects.create(user_id=request.user.id, article_id=article_id, is_liked=True)
+    return redirect(
+        'article_detail',
+        article_id=article_id
+    )
+
+
+def add_dislike(request, article_id):
+    Like.objects.create(user_id=request.user.id, article_id=article_id, is_liked=False)
+    return redirect(
+        'article_detail',
+        article_id=article_id
     )
 
 
