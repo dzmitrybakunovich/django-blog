@@ -140,13 +140,16 @@ def edit(request):
         user.username = request.POST.get('username')
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
-        user.avatar = request.FILES.get('image')
+        if request.FILES.get('image'):
+            user.avatar = request.FILES.get('image')
         user.save()
     return render(
         request,
         'main_app/edit_user_profile.html',
         {
-            'user': user
+            'user_article_count': Article.objects.filter(author_id=user_id).count(),
+            'user_comment_count': Comment.objects.filter(author_id=user_id).count(),
+            'user': user,
         },
     )
 

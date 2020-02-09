@@ -1,273 +1,107 @@
 {% extends 'main_app/basic_page.html' %}
 {% block content %}
-<div class="body_profile" style="    padding-top: 40px;
-    padding-bottom: 20px;
-    background-attachment: fixed;
-    background: url(/static/css/background.jpg);
-    background-size: cover;">
-    <div class="white_background_above" style="width: 1340px; margin-top: 0;">
-        {% if not is_my_profile %}
-            <div class="report" style="width: max-content; padding-top: 2.29%; margin-left: 30px;">
-                <a href="#" style="
-                text-transform: uppercase;
-                padding: 0 6px 0 6px;
-                border-radius: 5px 5px 0 0;
-                background-color: #738589;
-                color: #264041;
-                font-weight: 700;
-                font-size: 13px;">пожаловаться</a>
-            </div>
-        {% endif %}
-    </div>
-        <div class="report_profile" style="width: 100%; height: 64px; background-color: #264041;">
-            <style>
-                .change_profile a{
-                    text-transform: uppercase;
-                    padding: 0 10px 0 10px;
-                    border-radius: 5px 5px 0 0;
-                    background-color: #cbc6c2;
-                    color: #ea8d15;
-                    font-weight: 700;
-                    font-size: 20px;
-                }
-                .change_profile a:hover{
-                    color: black;
-                }
-            </style>
-            {% if is_my_profile %}
-                <div class="change_profile" style="width: max-content;padding-top: 37px;margin-left: 1150px;">
-                    <a href="/edit/profile">Изменить профиль</a>
-            {% else %}
-                <div class="change_profile" style="width: max-content;padding-top: 37px;margin-left: 1200px;">
-                    <a href="#" style="
-                    text-transform: uppercase;
-                    padding: 0 10px 0 10px;
-                    border-radius: 5px 5px 0 0;
-                    background-color: #cbc6c2;
-                    color: #ea8d15;
-                    font-weight: 700;
-                    font-size: 20px;
-                    ">Подписаться</a>
-            {% endif %}
+<div class="body_profile">
+    <div class="white_background_above_profile"></div>
+    <form method="POST" class="post-form">
+    {% csrf_token %}
+        <div class="report_profile">
+            <div class="change_profile">
+                <a href="#" onclick="save.click()">Сохранить</a>
             </div>
         </div>
-        <div class="main_profile" style="    width: 100%;
-        height: 437px;
-        margin: auto;">
-            <div class="aaaa" style="background-color: rgba(255, 255, 255, 0.34); height: 146px; width: 1340px;margin: auto;"></div>
-            <div class="ggg" style="    margin-top: -146px;
-    width: 1340px;
-    margin-left: auto;
-    margin-right: auto;">
-            <div class="profile_info_img" style="display: flex;">
-            <img src="{{ user.avatar.url }}" style="      margin-left: 235px;
-                                                        height: 178px;
-                                                        width: 178px;
-                                                        object-fit: cover;
-                                                        margin-top: -15px;
-                                                        border: 3px solid #fff;">
-            <div class="profile_info" style="width: 100%;">
-            <div class="profile_name" style="display: flex;border-bottom: 1px solid #ffffff; border-top: 1px solid #ffffff; /*position:absolute */; width: 100%; height: 44px; color: #fff; background-color: #000;">
-                <a style="margin-left: 40px; font-weight: 800; font-size: 34px; text-transform: uppercase;">{{ user.get_full_name }}</a>
-                {% if user.is_authenticated %}
-                <div class="user_online" style="margin-left: 11px;
+        <div class="main_profile">
+            <div class="white_background_above_main"></div>
+            <div class="about_profile">
+                <div class="profile_info_img">
+                    <div class="image_in_edit">
+                        <div class="cursor_pointer">
+                            <img src="{{ user.avatar.url }}" id="main_image" onclick="change_image()">
+                        </div>
+                    </div>
+                    <div class="profile_info">
+                        <div class="profile_name">
+                            <input class="input_full_name" type="text" name="first_name" value="{{ user.first_name }}">
+                            <input class="input_full_name" type="text" name="last_name" value="{{ user.last_name }}">
+                            {% if user.is_authenticated %}
+                                <div class="user_online" style="margin-left: 11px;
                                             width: 20px;
                                             height: 20px;
                                             border-radius: 20px;
                                             margin-top: 12px;
-                                            background-color: #fff;">
-                </div>
-                {% else %}
-                <div class="user_offline" style="margin-left: 11px;
+                                            background-color: #fff;"></div>
+                            {% else %}
+                                <div class="user_offline" style="margin-left: 11px;
                                             width: 20px;
                                             height: 20px;
                                             border-radius: 20px;
                                             margin-top: 12px;
-                                            background-color: #ea8d15;">
-                </div>
-                {% endif %}
-            </div>
-                       <a style="text-transform: uppercase;
-            padding: 0 10px 0;
-            background-color: #ea8d15;
-            font-weight: 900;
-            font-size: 16px;
-            display: inline-block;">USERNAME:
-                            <input type="text" name="username" value="{{user.username}}" onkeydown="style.width = ((this.value.length + 1) * 8) + 'px';" style="text-transform: uppercase; font-size: 16px;" />
-                        </a>
-                </div>
-            </div>
-                    <div class="statitsic_user" style="
-                    text-align: center;
-                    margin-top: -50px;
-                    display: flex;
-                    width: 100%;
-                    height: 115px;
-                    border-bottom: 2px solid #ea8d15;
-                    background-color: #264041;">
-                        <div class="statistic" style="margin-left: 419px; height: 100%;     width: 190px;border-right: 1px solid #fff">
-                            <div class="text_in_statistic" style="color: #ea8d15; background-color: rgba(255, 255, 255, 0.15); width: 100%">
-                                <style>
-                                    .text_in_statistic a#statistic_article{
-                                        color: #ea8d15;
-                                    }
-                                    .text_in_statistic a#statistic_article:hover{
-                                        color: #fff;
-                                    }
-                                </style>
-                                <a href="{% url 'article_created_by_user' user.id %}" id="statistic_article" style="text-transform: uppercase;
-                                                font-size: 19px;
-                                                font-weight: 700;
-                                                margin-left: 25px;">
-                                    Статьи
-                                </a>
-                            </div>
-                            <div class="number_in_statistic" style="margin-top: 17px;">
-                                <a style="    text-transform: uppercase;
-                                                font-size: 30px;
-                                                font-weight: 800;
-                                                margin-left: 25px;">
-                                    {{ user_article_count }}
-                                </a>
-                            </div>
+                                            background-color: #ea8d15;"></div>
+                            {% endif %}
                         </div>
-                        <div class="subscribers" style="height: 100%;     width: 200px; border-right: 1px solid #fff">
-                            <div class="text_in_statistic" style="color: #ea8d15; background-color: rgba(255, 255, 255, 0.15); width: 100%">
-                                <a style="    text-transform: uppercase;
-                                                font-size: 19px;
-                                                font-weight: 700;">
-                                    Подписчики
-                                </a>
-                            </div>
-                            <div class="number_in_statistic" style="margin-top: 17px;">
-                                <a style="    text-transform: uppercase;
-                                                font-size: 30px;
-                                                font-weight: 800;">
-                                    NONE
-                                </a>
-                            </div>
-                        </div>
-                        <div class="subscriptions" style="height: 100%; width: 190px;">
-                            <div class="text_in_statistic" style="border-radius: 0 8px 8px 0; color: #ea8d15; background-color: rgba(255, 255, 255, 0.15); width: 100%">
-                                <a style="    text-transform: uppercase;
-                                                font-size: 19px;
-                                                font-weight: 700;">
-                                    Подписки
-                                </a>
-                            </div>
-                            <div class="number_in_statistic" style="margin-top: 17px;">
-                                <a style="    text-transform: uppercase;
-                                                font-size: 30px;
-                                                font-weight: 800;">
-                                    NONE
-                                </a>
-                            </div>
-                        </div>
-
+                        <a class="username_in_edit">USERNAME: </a>
+                        <input type="text" class="input" maxlength="20" name="username" value="{{ user.username }}"/>
+                        <input type="file" id="image" name="image">
+                        <input type="submit" id="save" value="Сохранить" >
                     </div>
-            </div>
-           <a href="#"><div class="statistic_info_background"  onclick="myFunction()" style="width: 1340px;    margin-left: auto;
-            color: white;
-                                                            margin-right: auto;
-                                                            height: 46px;
-                                                            background-color: rgba(0, 0, 0, 0.80);">
-                <style>
-                    .statistic_buttom{
-                        width: 20px;
-                        height: 20px;
-                        margin-top: 5px;
-                        border-radius: 0 25px 5px 25px;
-                        transform: rotate(45deg);
-                        background: linear-gradient(-45deg, #fff 50%, transparent 50%);
-                    }
-                    .statistic_info_background:hover .statistic_buttom{
-                        background: linear-gradient(-45deg, #ea8d15 50%, transparent 50%);
-                    }
-                    .statistic_info_background:hover .test_y{
-                        color: #ea8d15;
-                    }
-
-                </style>
-                <script>
-                    function myFunction()
-                    {   var top = document.getElementById("qwe").style.top;
-                        if(top == '0px')
-                        {
-                            document.getElementById("qwe").style.top='-100%';
-                            document.getElementById("but_stat").style.marginTop='5px';
-                            document.getElementById("but_stat").style.transform='rotate(45deg)';
-                            document.getElementById("qwerty").style.marginTop='7px';
-                        }
-                        else
-                        {
-                            document.getElementById("qwe").style.top='0px';
-                            document.getElementById("but_stat").style.transform='rotate(225deg)';
-                            document.getElementById("but_stat").style.marginTop='20px';
-                            document.getElementById("qwerty").style.marginTop='1px';
-                        }
-                    }
-                </script>
-                <div class="body_statistic_buttom" style="margin: auto;
-                                width: max-content;">
-                    <div class="test_govno" style="display: inline-flex;">
-                        <div class="statistic_buttom" id="but_stat" style="transform: rotate(45deg); margin-top: 5px;"></div>
-                        <p class="test_y" style="padding-left: 13px;
-                                font-size: 25px;
-                                margin-top: 5px;
-                                font-weight: bold;">СТАТИСТИКА</p>
-                        </div>
                 </div>
-
-            <div class="white_background_statistic" id="qwerty">
-               <div class="uoi" id="qwe" style="    background-color: rgba(165, 88, 0, 0.24);">
-                    <div class="statistic_comments" style="display: inline-flex; margin-top: 35px;">
-                        <div class="white_poloska" style="width: 120px; height: 30px;">
-                            <div class="poloska" style="height: 15px; width: 100%; border-bottom: 2px solid white;"></div>
+                <div class="statistic_user">
+                    <div class="statistic">
+                        <div class="text_in_statistic">
+                            <a href="{% url 'article_created_by_user' user.id %}" id="statistic_article">
+                                Статьи
+                            </a>
                         </div>
-                        <div class="text_testik" style="
-                                                    padding-top: 2px;
-                                                    font-weight: bold;
-                                                    font-size: 17px;
-                                                    ">комментарии: {{user_comment_count}}</div>
+                        <div class="number_for_article">
+                            <a>{{ user_article_count }}</a>
+                        </div>
                     </div>
-                   <div class="statistic_likes">
-                       <div class="heh" style="display: inline-flex">
-                            <div class="white_poloska" style="width: 120px; height: 30px;">
-                                <div class="poloska" style="height: 15px; width: 100%; border-bottom: 2px solid white;"></div>
-                            </div>
-                            <div class="text_testik" style="
-                                                        padding-top: 2px;
-                                                        font-weight: bold;
-                                                        font-size: 17px;
-                                                        ">нравится: NONE</div>
+                    <div class="subscribers">
+                        <div class="text_in_statistic">
+                            <a id="statistic_subscribers">Подписчики</a>
                         </div>
-                   </div>
+                        <div class="number_for_subscribers">
+                            <a>NONE</a>
+                        </div>
+                    </div>
+                    <div class="subscriptions">
+                        <div class="text_in_statistic">
+                            <a id="statistic_subscriptions">Подписки</a>
+                        </div>
+                        <div class="number_for_subscriptions">
+                            <a>NONE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cursor_pointer">
+                <div class="statistic_info_background" onclick="open_statistic()">
+                    <div class="main_statistic_button">
+                        <div class="body_statistic_button">
+                            <div class="statistic_button" id="statistic_button"></div>
+                            <p class="statistic_name">СТАТИСТИКА</p>
+                        </div>
+                    </div>
+                    <div class="white_background_statistic" id="body_statistic">
+                        <div class="body_with_statistic" id="block_with_statistic">
+                            <div class="statistic_comments">
+                                <div class="body_white_strip">
+                                    <div class="white_strip"></div>
+                                </div>
+                                <div class="text_in_body_statistic">комментарии: {{user_comment_count}}</div>
+                            </div>
+                            <div class="statistic_likes">
+                                <div class="display_statistic_likes">
+                                    <div class="body_white_strip">
+                                        <div class="white_strip"></div>
+                                    </div>
+                                    <div class="text_in_body_statistic">нравится: NONE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-       </a>
-    </div>
+    </form>
 </div>
-<form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <p>
-            <label>Введите login</label><br>
-            <input type="text" name="username" value="{{user.username}}" />
-        </p>
-        <p>
-            <label>Введите фамилию</label><br>
-            <input type="text" name="last_name" value="{{user.last_name}}" />
-        </p>
-        <p>
-            <label>Введите имя</label><br>
-            <input type="text" name="first_name" value="{{user.first_name}}" />
-        </p>
-        <img src="{{user.avatar.url}}" style="width: 110px; height: 110px">
-        <p>
-            <label for="id_image">Image:</label>
-            <input type="file" name="image" accept="image/*" id="id_image">
-        </p>
-        <input type="submit" value="Сохранить" >
-</form>
-
 {% endblock %}

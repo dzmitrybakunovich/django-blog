@@ -1133,6 +1133,263 @@ div.main_user_article:hover div.short_description {
 
 
 /* User Profile */
+.body_profile{
+	height: 544px;
+    padding-top: 81px;
+    padding-bottom: 82px;
+    background-attachment: fixed;
+    background: url(/static/css/background.jpg);
+    background-size: cover;
+}
+
+.white_background_above_profile{
+	width: 1340px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 51px;
+    background-color: rgba(255, 255, 255, 0.34);
+	margin-top: 0;
+}
+
+.report_profile{
+	width: 100%;
+	height: 64px;
+	background-color: #264041;
+}
+
+.change_profile{
+	width: max-content;
+	padding-top: 37px;
+	margin-left: 1210px;
+}
+
+.change_profile a{
+	text-transform: uppercase;
+	padding: 0 10px 0 10px;
+	border-radius: 5px 5px 0 0;
+	background-color: #cbc6c2;
+	color: #ea8d15;
+	font-weight: 700;
+	font-size: 20px;
+}
+.change_profile a:hover{
+	color: black;
+}
+
+.main_profile{
+	width: 100%;
+	height: 437px;
+	margin: auto;
+}
+
+.white_background_above_main{
+	background-color: rgba(255, 255, 255, 0.34);
+	height: 146px;
+	width: 1340px;
+	margin: auto;
+}
+
+.about_profile{
+	margin-top: -146px;
+    width: 1340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile_info_img{
+	display: flex;
+}
+
+.user_online{
+	margin-left: 11px;
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	margin-top: 12px;
+	background-color: #fff;
+}
+
+.user_offline{
+	margin-left: 11px;
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	margin-top: 12px;
+	background-color: #ea8d15;
+}
+
+.profile_info{
+	width: 100%;
+}
+
+.profile_name{
+	display: flex;
+	border-bottom: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	width: 100%;
+	height: 44px;
+	color: #fff;
+	background-color: #000;
+}
+
+.profile_name a{
+	margin-left: 40px;
+	font-weight: 800;
+	font-size: 34px;
+	text-transform: uppercase;
+}
+
+.username{
+	text-transform: uppercase;
+	padding: 0 10px 0;
+	background-color: #ea8d15;
+	font-weight: 900;
+	font-size: 16px;
+	display: inline-block;
+}
+
+.statistic_user{
+	text-align: center;
+	margin-top: -50px;
+	display: flex;
+	width: 100%;
+	height: 115px;
+	border-bottom: 2px solid #ea8d15;
+	background-color: #264041;
+}
+
+.statistic{
+	margin-left: 419px;
+	height: 100%;
+	width: 190px;
+	border-right: 1px solid #fff
+}
+
+.text_in_statistic{
+	color: #ea8d15;
+	background-color: rgba(255, 255, 255, 0.15);
+	width: 100%
+}
+
+#statistic_article{
+	text-transform: uppercase;
+	font-size: 19px;
+	font-weight: 700;
+	margin-left: 25px;
+}
+
+.text_in_statistic a#statistic_article{
+	color: #ea8d15;
+}
+.text_in_statistic a#statistic_article:hover{
+	color: #fff;
+}
+
+.number_for_article{
+	margin-top: 17px;
+}
+
+.number_for_article a{
+	text-transform: uppercase;
+	font-size: 30px;
+	font-weight: 800;
+	margin-left: 25px;
+}
+
+.subscribers{
+	height: 100%;
+	width: 200px;
+	border-right: 1px solid #fff
+}
+
+#statistic_subscribers{
+	text-transform: uppercase;
+	font-size: 19px;
+	font-weight: 700;
+}
+
+.number_for_subscribers{
+	margin-top: 17px;
+}
+
+.number_for_subscribers a{
+	text-transform: uppercase;
+	font-size: 30px;
+	font-weight: 800;
+}
+
+.subscriptions{
+	height: 100%;
+	width: 190px;
+}
+
+#statistic_subscriptions{
+	text-transform: uppercase;
+	font-size: 19px;
+	font-weight: 700;
+}
+
+.number_for_subscriptions{
+	margin-top: 17px;
+}
+
+.number_for_subscriptions a{
+	text-transform: uppercase;
+	font-size: 30px;
+	font-weight: 800;
+}
+
+.statistic_button{
+	width: 20px;
+	height: 20px;
+	margin-top: 5px;
+	border-radius: 0 25px 5px 25px;
+	transform: rotate(45deg);
+	background: linear-gradient(-45deg, #fff 50%, transparent 50%);
+}
+
+.statistic_info_background{
+	width: 1340px;
+	margin-left: auto;
+	color: white;
+	margin-right: auto;
+	height: 46px;
+	background-color: rgba(0, 0, 0, 0.80);
+}
+
+.statistic_info_background:hover .statistic_button{
+	background: linear-gradient(-45deg, #ea8d15 50%, transparent 50%);
+}
+
+.statistic_info_background:hover .statistic_name{
+	color: #ea8d15;
+}
+
+.cursor_pointer:hover{
+	cursor: pointer;
+}
+
+.main_statistic_button{
+	margin: auto;
+	width: max-content;
+}
+
+.body_statistic_button{
+	display: inline-flex;
+}
+
+.statistic_name{
+	padding-left: 13px;
+	font-size: 25px;
+	margin-top: 5px;
+	font-weight: bold;
+}
+
+#statistic_button{
+	transform: rotate(45deg);
+	margin-top: 5px;
+}
+
 .white_background_statistic{
     margin-top: 7px;
     width: 1340px;
@@ -1143,17 +1400,115 @@ div.main_user_article:hover div.short_description {
     background-color: rgba(255, 255, 255, 0.34);
 }
 
-.uoi{
+.body_with_statistic{
     color: #000;
     height: 100%;
     width: 100%;
     position: relative;
     top: -100%;
     transition: all .4s;
+	background-color: rgba(165, 88, 0, 0.24);
+}
+
+.statistic_comments{
+	display: inline-flex;
+	margin-top: 35px;
+}
+
+.body_white_strip{
+	width: 120px;
+	height: 30px;
+}
+
+.white_strip{
+	height: 15px;
+	width: 100%;
+	border-bottom: 2px solid white;
+}
+
+.display_statistic_likes{
+	display: inline-flex;
+}
+
+.text_in_body_statistic{
+	padding-top: 2px;
+	font-weight: bold;
+	font-size: 17px;
 }
 
 .cke_screen_reader_only{
 	display: none;
+}
+
+/* Other in edit user */
+.image_in_edit{
+	margin-left: 235px;
+	height: 184px;
+	width: 184px;
+	margin-top: -15px;
+	background: white;
+	z-index: 1;
+}
+
+.image_in_edit img{
+	height: 178px;
+	width: 178px;
+	object-fit: cover;
+	opacity: 0.7;
+	border: 3px solid #fff;
+}
+
+.image_in_edit:hover{
+	cursor: pointer;
+}
+
+.username_in_edit{
+	text-transform: uppercase;
+    padding: 1px 10px 1px;
+    background-color: #ea8d15;
+    font-weight: 900;
+    font-size: 16px;
+}
+
+#image {
+	display: none;
+}
+
+#save{
+	display: none;
+}
+
+.input_full_name{
+	margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 40px;
+    background: #ea8c1438;
+    border: 1px solid #ea8c14;
+    color: white;
+    font-weight: 800;
+    font-size: 34px;
+    text-transform: uppercase;
+    outline: none;
+    max-width: 220px;
+}
+
+.input{
+	max-width: 220px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid white;
+    font-weight: 900;
+    outline: none;
+    text-transform: uppercase;
+    background: rgba(235, 174, 96, 0.68) !important;
+}
+
+.text_in_statistic a#statistic_article{
+	color: #ea8d15;
+}
+
+.text_in_statistic a#statistic_article:hover{
+	color: #fff;
 }
 
 /* Like and Dislike */
