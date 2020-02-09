@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MyBlog</title>
+    <title>LifestyleAndBlog</title>
     {% load static %}
     {% load humanize %}
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'world.png' %}"/>
-</head>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    </head>
     <body>
         <script type="text/javascript">
-        function openbox(id){
-            display = document.getElementById(id).style.display;
-            if(display == 'none'){
-               document.getElementById(id).style.display='block';
-            }else{
-              document.getElementById(id).style.display='none';
-           }
-        }
+
         </script>
     <header>
         {% if request.user.is_authenticated %}
