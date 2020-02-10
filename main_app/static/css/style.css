@@ -661,6 +661,7 @@ a#user_in_last_comment:hover {
 }
 
 .all_article_size{
+	padding-top: 46px;
     height:100%;
     width:100%;
     background-image: url('/static/css/background.jpg');
@@ -669,23 +670,26 @@ a#user_in_last_comment:hover {
     background-size: cover;
 }
 
+.body_logo{
+	width: 1445px;
+}
+
 .header_logo{
+	position: relative;
     background-color: black;
-    margin-top: -49px;
     border: 3px solid white;
-    width: 506px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 89px;
+    width: 390px;
+    margin: -32px auto -32px;
+    height: 58px;
 }
 
 .header_logo a{
-    position: absolute;
-    margin-left: 72px;
-    margin-top: 12px;
+	display: block;
     color: #ffffff;
     font-weight: 800;
-    font-size: 45px;
+    font-size: 42px;
+    width: min-content;
+    margin: auto;
 }
 
 .white_background_above{
