@@ -39,7 +39,9 @@
         </div>
     </div>
     <div class="blog_text">
-        <p>{{ article.text }}</p>
+        {% autoescape off %}
+            <p>{{ article.text }}</p>
+        {% endautoescape %}
         {% if request.user.is_authenticated %}
             {% if is_liked %}
                 <div class="marks_diagram">
@@ -134,9 +136,10 @@
                     {% csrf_token %}
                     <div class="comment_input_and_save">
                         {{ form.media }}
+                        <div style="width: 820px">
                         {{ form.text }}
-
-                        <button type="submit" class="save btn btn-default">Send</button>
+                        </div>
+                            <button type="submit" class="save btn btn-default">Send</button>
                     </div>
                 </form>
             </div>
