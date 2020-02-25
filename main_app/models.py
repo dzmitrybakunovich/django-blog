@@ -22,7 +22,7 @@ class Article(models.Model):
         db_table = 'article'
     title = models.CharField(max_length=150)
     image = models.ImageField(upload_to='images/for_article', null=True, blank=True)
-    text = models.TextField(null=True, blank=True)
+    text = RichTextField()
     short_description = models.CharField(max_length=120, null=True, blank=True)
     date = models.DateTimeField(null=True, blank=True)
     author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)

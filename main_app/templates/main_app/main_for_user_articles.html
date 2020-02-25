@@ -1,6 +1,15 @@
+{% load static %}
 <div class="all_article_body">
     <div class="all_article_size">
-        <div class="white_background_above"></div>
+        <div class="white_background_above">
+            {% if request.user.is_authenticated %}
+             <div class="body_tags">
+                 <a href="{% url 'new_post' %}" class="add_article">
+                     <div>ADD ARTICLE</div>
+                 </a>
+             </div>
+            {% endif %}
+        </div>
         <div class="creator_articles">
             <p>Статьи
                 <a href="{% url 'user_profile' user.id %}">{{user.get_full_name}}</a>
@@ -16,17 +25,41 @@
         {% for article in articles %}
             <div class="user_article">
                 <a href="{% url 'article_detail' article.id %}">
-                    <div class="short_description" style="background-image: url('{{article.image.url}}');">
-                        <div class="top_border" style="
+                    <div class="short_description" style="background-image: url('{{ article.image.url }}')">
+                        <div style="background: #00000087; width: 100%; height: 100%">
+                            <div class="top_border" style="
+                                                opacity: 1;
                                                 width: 515px;
                                                 margin-left: auto;
                                                 margin-right: auto;
-                                                margin-top: 20px;
+                                                padding-top: 20px;
                                                 border-bottom: 1px solid #D2D7DB;;
                                             "></div>
-                        <p>{{ article.short_description }}</p>
+                            <p style="opacity: 1">{{ article.short_description }}</p>
+                            {% if article.author_id == request.user.id %}
+                                <div class="edit_or_delete_article" style="display: flex; float: right; margin-right: 10px;">
+                                    <a href="{% url 'edit_article' article.id %}">
+                                        <img alt="edit article"
+                                             title="EDIT ARTICLE"
+                                             class="edit_article"
+                                             src="{% static 'css/edit_article.png' %}"
+                                        >
+                                    </a>
+                                    <a href="{% url 'delete_article' article.id %}">
+                                        <img alt="delete article"
+                                             title="DELETE ARTICLE"
+                                             class="delete_article"
+                                             src="{% static 'css/delete_article.png'%}"
+                                        >
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
-                    <img src="{{ article.image.url }}">
+                    <img src="{{ article.image.url }}" style="object-fit: cover;
+	width: 120px;
+	height: 110px;
+	margin-right: 20px;">
                     <div class="user_article_and_img">
                         <a class="user_article_date">{{ article.date.date }}</a>
                         <br>
@@ -41,7 +74,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" fill="#8A8A8A" d="M4.5,26C3.672,26,3,26.672,3,27.5S3.672,29,4.5,29   S6,28.328,6,27.5S5.328,26,4.5,26z M4.5,28C4.225,28,4,27.775,4,27.5S4.225,27,4.5,27S5,27.225,5,27.5S4.775,28,4.5,28z"/>
                                     </g>
                                     </svg>
-                                24
+                                {{ article.like_count }}
                             </div>
                             <div class="user_show_comment">
                                 <svg width="15" height="14" style="margin-right: 7px;">
@@ -51,7 +84,7 @@
                                         </svg>
                                     </use>
                                 </svg>
-                                {{ article.comment__count }}
+                                {{ article.comment_count }}
                             </div>
                             <a href="" class="user_article_autor">
                                 <div class="user_img_and_name">

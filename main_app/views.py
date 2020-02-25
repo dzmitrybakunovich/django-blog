@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 import random
 
@@ -40,7 +40,6 @@ def main_page(request):
 
 # page article with comments
 def page_article(request, article_id=1):
-    global dislike_percent
     AMOUNT_LAST_ARTICLES = 2
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -50,7 +49,7 @@ def page_article(request, article_id=1):
             comment.author_id = request.user.id
             comment.date = timezone.now()
             comment.save()
-            return redirect('article_detail', id=article_id)
+            return redirect('article_detail', article_id=article_id)
     else:
         form = CommentForm()
 
@@ -96,29 +95,6 @@ def add_dislike(request, article_id):
     )
 
 
-def new_article(request):
-    if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            article = form.save(commit=False)
-            article.author_id = request.user.id
-            article.date = timezone.now()
-            article.save()
-            return redirect(
-                'article_detail',
-                article_id=article.id
-            )
-    else:
-        form = ArticleForm(request.POST, request.FILES)
-    return render(
-        request,
-        'main_app/article_edit.html',
-        {
-            'form': form
-        }
-    )
-
-
 def user_profile(request, user_id=1):
     user = CustomUser.objects.get(id=user_id)
     return render(
@@ -133,7 +109,7 @@ def user_profile(request, user_id=1):
     )
 
 
-def edit(request):
+def edit_user(request):
     user_id = request.user.id
     user = CustomUser.objects.get(id=user_id)
     if request.method == 'POST':
@@ -157,7 +133,10 @@ def edit(request):
 def article_created_by_user(request, user_id=1):
     AMOUNT_LAST_COMMENTS = 4
     last_comments = Comment.objects.order_by('-date')[0:AMOUNT_LAST_COMMENTS]
-    all_article = Article.objects.annotate(Count('comment')).filter(author_id=user_id).order_by('-date')
+    all_article = Article.objects.annotate(
+        like_count=Count('like', filter=Q(like__is_liked=True), distinct=True),
+        comment_count=Count('comment', distinct=True)
+    ).filter(author_id=user_id).order_by('-date')
     paginator = Paginator(all_article, 8)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
@@ -170,3 +149,54 @@ def article_created_by_user(request, user_id=1):
             'user': CustomUser.objects.get(id=user_id),
         }
     )
+
+
+def new_article(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.author_id = request.user.id
+            article.date = timezone.now()
+            article.save()
+            return redirect(
+                'article_detail',
+                article_id=article.id
+            )
+    else:
+        form = ArticleForm()
+    return render(
+        request,
+        'main_app/article_edit.html',
+        {
+            'form': form,
+            'type': 'CREATE',
+        }
+    )
+
+
+def edit_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
+    if request.method == 'POST':
+        article.title = request.POST.get('title')
+        article.text = request.POST.get('text')
+        article.short_description = request.POST.get('short_description')
+        if request.FILES.get('image'):
+            article.image = request.FILES.get('image')
+        article.save()
+    return render(
+        request,
+        'main_app/article_edit.html',
+        {
+            'form': form,
+            'article': article,
+            'type': 'UPDATE',
+        }
+    )
+
+
+def delete_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.delete()
+    return redirect('/')

@@ -670,7 +670,7 @@ a#user_in_last_comment:hover {
 }
 
 .body_logo{
-	width: 1445px;
+	width: 85%;
 }
 
 .header_logo{
@@ -680,6 +680,7 @@ a#user_in_last_comment:hover {
     width: 390px;
     margin: -32px auto -32px;
     height: 58px;
+	z-index: 1;
 }
 
 .header_logo a{
@@ -756,7 +757,7 @@ div.main_user_article:hover div.short_description {
 
 .short_description p{
     width:515px;
-    height: 170px;
+    height: 163px;
     margin-left: auto;
     margin-right: auto;
     color: white;
@@ -832,13 +833,6 @@ div.main_user_article:hover div.short_description {
 	height: 220px;
 	width: 547px;
  }
-
-.user_article img{
-	object-fit: cover;
-	width: 120px;
-	height: 110px;
-	margin-right: 20px;
-}
 
 .user_article_and_img{
 	display: flex;
@@ -940,7 +934,7 @@ div.main_user_article:hover div.short_description {
 }
 
 
-.main_article img{
+.main_article_img{
     opacity: 0.6;
     object-fit: cover;
     width: 1147px;
@@ -1066,7 +1060,6 @@ div.main_user_article:hover div.short_description {
 }
 
 .user_article a{
-     display: block;
      height: 100%; /* Высота на весь слой */
 }
 
@@ -1623,4 +1616,215 @@ div.main_user_article:hover div.short_description {
 	margin: auto;
 	height: 12px;
 	background-color: #e9160a;
+}
+
+/* Add article */
+.body_tags{
+	width: 1147px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.body_tags div{
+	font-weight: bold;
+	font-size: 18px;
+	width: max-content;
+	margin: auto;
+	margin-top: 3px;
+	color: black;
+}
+
+.add_article{
+	border-radius: 10px;
+	display: block;
+	height: 32px;
+	width: 140px;
+	background: #d3cab4;
+	float: right;
+	margin-top: 7px;
+	border: 3px solid black;
+}
+
+.main_new_article{
+	height: 544px;
+    padding-top: 81px;
+    padding-bottom: 82px;
+    background-attachment: fixed;
+    background: url(/static/css/background.jpg);
+    background-size: cover;
+}
+
+.new_article{
+	height: 62px;
+    background-color: #264041;
+    border-bottom: 2px solid #ea8d15;
+}
+
+.new_article p{
+	width: fit-content;
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin: auto;
+    padding-top: 15px;
+}
+
+.body_new_article{
+	width: 1340px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 437px;
+    background-color: rgba(255, 255, 255, 0.34);
+}
+
+.create_new_article{
+	width: 85%;
+	height: 100%;
+	margin: auto;
+}
+
+.new_article_title{
+	padding-top: 8px;
+}
+
+.new_article_title textarea{
+	width: 100%;
+	font-weight: bold;
+	font-size: 18px;
+	resize: none;
+	outline: none;
+	overflow: hidden;
+	background: #d3cab4;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
+.new_article_title label{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.new_article_text{
+	padding-top: 8px;
+}
+
+.new_article_text label{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.new_article_text div{
+	width: 100%;
+}
+
+.new_article_text{
+	padding-top: 8px;
+}
+
+.new_article_short_description{
+	padding-top: 8px;
+}
+
+.new_article_short_description textarea{
+	width: 100%;
+	font-weight: bold;
+	font-size: 18px;
+	resize: none;
+	outline: none;
+	overflow: hidden;
+	background: #d3cab4;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
+.new_article_short_description label{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.new_article_image{
+	padding-top: 8px;
+}
+
+.inputfile {
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	padding: 5px 15px 5px 15px;
+	font-weight: bold;
+    text-transform: uppercase;
+    color: black;
+    background-color: #d3cab4;
+    display: inline-block;
+	border: 2px solid #000;
+	border-radius: 10px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+	background-color: #c0b8a5;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+#id_text{
+	width: 100%;
+}
+
+.label_new_image{
+	display: block;
+	font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* CKEditor */
+#cke_1_top{
+	border-radius: 10px 10px 0 0;
+}
+
+#cke_1_bottom{
+	border-radius: 0 0 10px 10px;
+}
+
+.cke_inner.cke_reset{
+	border-radius: 10px;
+}
+
+.cke_1.cke_chrome{
+	border: 0;
+}
+
+.django-ckeditor-widget{
+	background: #d3cab4;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+/* Edit and delete article on short description */
+.delete_article{
+	height: 28px;
+	width: 28px;
+	opacity: 1;
+}
+
+.delete_article:hover{
+	opacity: 0.65;
+}
+
+.edit_article{
+	margin-right: 10px;
+	height: 28px;
+	width: 28px;
+	opacity: 1;
+}
+
+.edit_article:hover{
+	opacity: 0.65;
 }

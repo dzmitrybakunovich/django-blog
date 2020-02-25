@@ -1,6 +1,15 @@
+{% load static %}
 <div class="all_article_body">
     <div class="all_article_size">
-        <div class="white_background_above"></div>
+        <div class="white_background_above">
+            {% if request.user.is_authenticated %}
+             <div class="body_tags">
+                 <a href="{% url 'new_post' %}" class="add_article">
+                     <div>ADD ARTICLE</div>
+                 </a>
+             </div>
+            {% endif %}
+        </div>
         <div class="creator_articles">
             <p>СТАТЬИ БЛОГА</p>
         </div>
@@ -8,7 +17,7 @@
             <div class="main_interactive">
                 <div class="main_article">
                     <h2>Выбор редакции</h2>
-                    <img src="{{ main_article.image.url }}">
+                    <img class="main_article_img" src="{{ main_article.image.url }}">
                     <div class="main_article_info">
                         <div class="about_main_article">
                             <div class="article_info-about">
@@ -63,6 +72,24 @@
                                                                 border-bottom: 1px solid #D2D7DB;;
                                                             "></div>
                                             <p style="opacity: 1">{{ article.short_description }}</p>
+                                            {% if article.author_id == request.user.id %}
+                                                <div class="edit_or_delete_article" style="display: flex; float: right; margin-right: 10px;">
+                                                    <a href="{% url 'edit_article' article.id %}">
+                                                        <img alt="edit article"
+                                                             title="EDIT ARTICLE"
+                                                             class="edit_article"
+                                                             src="{% static 'css/edit_article.png' %}"
+                                                        >
+                                                    </a>
+                                                    <a href="{% url 'delete_article' article.id %}">
+                                                        <img alt="delete article"
+                                                             title="DELETE ARTICLE"
+                                                             class="delete_article"
+                                                             src="{% static 'css/delete_article.png'%}"
+                                                        >
+                                                    </a>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <img src="{{  article.image.url }}" style="object-fit: cover;
@@ -121,8 +148,8 @@
         {% for article in articles %}
             <div class="user_article">
                 <a href="{% url 'article_detail' article.id %}">
-                    <div class="short_description" style="background-image: url('{{article.image.url}}');">
-                         <div style="background: #00000087; width: 100%; height: 100%">
+                    <div class="short_description" style="background-image: url('{{ article.image.url }}')">
+                        <div style="background: #00000087; width: 100%; height: 100%">
                             <div class="top_border" style="
                                                 opacity: 1;
                                                 width: 515px;
@@ -132,10 +159,30 @@
                                                 border-bottom: 1px solid #D2D7DB;;
                                             "></div>
                             <p style="opacity: 1">{{ article.short_description }}</p>
+                            {% if article.author_id == request.user.id %}
+                                <div class="edit_or_delete_article" style="display: flex; float: right; margin-right: 10px;">
+                                    <a href="{% url 'edit_article' article.id %}">
+                                        <img alt="edit article"
+                                             title="EDIT ARTICLE"
+                                             class="edit_article"
+                                             src="{% static 'css/edit_article.png' %}"
+                                        >
+                                    </a>
+                                    <a href="{% url 'delete_article' article.id %}">
+                                        <img alt="delete article"
+                                             title="DELETE ARTICLE"
+                                             class="delete_article"
+                                             src="{% static 'css/delete_article.png'%}"
+                                        >
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-
-                    <img src="{{ article.image.url }}">
+                    <img src="{{ article.image.url }}" style="object-fit: cover;
+                                                            width: 120px;
+                                                            height: 110px;
+                                                            margin-right: 20px;">
                     <div class="user_article_and_img">
                         <a class="user_article_date">{{ article.date.date }}</a>
                         <br>
