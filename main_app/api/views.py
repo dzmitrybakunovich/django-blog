@@ -1,22 +1,25 @@
 from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_framework.generics import get_object_or_404
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from ..models import Article, CustomUser
 from .serializers import ArticleSerializer
 
 
-class ArticleView(ListModelMixin, CreateModelMixin, GenericAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+class ArticleView(APIView):
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    @staticmethod
+    def get(request):
+        articles = Article.objects.all()
+        serializer = ArticleSerializer(articles, many=True)
+        return Response({'articles': serializer.data})
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-class SingleArticleView(RetrieveUpdateAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    @staticmethod
+    def post(request):
+        article = request.data.get('article')
+        serializer = ArticleSerializer(data=article)
+        if serializer.is_valid(raise_exception=True):
+            article_saved = serializer.save()
+            return Response({"success": "Article created successfully".format(article_saved.title)})
