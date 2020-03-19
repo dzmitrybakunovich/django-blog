@@ -24,8 +24,8 @@ class Article(models.Model):
     image = models.ImageField(upload_to='images/for_article', null=True, blank=True)
     text = RichTextField()
     short_description = models.CharField(max_length=120, null=True, blank=True)
-    date = models.DateTimeField(null=True, blank=True)
-    author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -35,12 +35,12 @@ class Comment(models.Model):
     class Meta:
         db_table = 'comment'
     text = RichTextField()
-    date = models.DateTimeField(blank=True, null=True)
+    date = models.DateTimeField(auto_now=True)
     article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE)
-    author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE)
 
 
 class Like(models.Model):
-    user = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
-    article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE)
+    article = models.ForeignKey('main_app.Article', on_delete=models.CASCADE)
     is_liked = models.BooleanField()

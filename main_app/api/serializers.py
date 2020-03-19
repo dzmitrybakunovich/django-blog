@@ -1,19 +1,15 @@
 from rest_framework import serializers
 
-from ..models import Article
+from ..models import Article, CustomUser
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Article
-        fields = (
-            'id',
-            'title',
-            'text',
-            'short_description',
-        )
+        fields = '__all__'
 
-    @staticmethod
-    def create(self, validated_data):
-        return Article.objects.create(**validated_data)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'

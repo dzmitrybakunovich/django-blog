@@ -35,7 +35,6 @@ class ArticleAdmin(admin.ModelAdmin):
         'short_description',
         'author',
         'text',
-        'date',
     ]
     inlines = [ArticleInLine]
 
