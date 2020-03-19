@@ -47,7 +47,6 @@ def page_article(request, article_id=1):
             comment = form.save(commit=False)
             comment.article_id = article_id
             comment.author_id = request.user.id
-            comment.date = timezone.now()
             comment.save()
             return redirect('article_detail', article_id=article_id)
     else:
@@ -157,7 +156,6 @@ def new_article(request):
         if form.is_valid():
             article = form.save(commit=False)
             article.author_id = request.user.id
-            article.date = timezone.now()
             article.save()
             return redirect(
                 'article_detail',

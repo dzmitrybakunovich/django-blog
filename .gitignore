@@ -9,4 +9,7 @@ __pycache__/
 local_settings.py
 staticfiles/
 .idea/
-main_app/migrations/
+
+### Images ###
+*.jpg
+*.png
