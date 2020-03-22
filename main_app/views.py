@@ -1,10 +1,12 @@
+import random
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-import random
 
-from .forms import ArticleForm, CommentForm
+from .forms import ArticleForm, CommentForm, CustomUserChangeForm
 from .models import Article, Comment, Like, CustomUser
 
 
@@ -198,3 +200,13 @@ def delete_article(request, article_id):
     article = Article.objects.get(id=article_id)
     article.delete()
     return redirect('/')
+
+
+def get_online(request):
+    try:
+        user = CustomUser.objects.get(pk=request.user.id)
+        user.last_online = timezone.now()
+        user.save()
+        return HttpResponse({'status': 'Success'})
+    except CustomUser.DoesNotExist:
+        return HttpResponse({'status': 'Fail'})

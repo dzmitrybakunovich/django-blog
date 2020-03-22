@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'articles/user/(?P<user_id>\d+)$', views.article_created_by_user, name='article_created_by_user'),
     url(r'delete/(?P<article_id>\d+)$', views.delete_article, name='delete_article'),
     url(r'edit/(?P<article_id>\d+)$', views.edit_article, name='edit_article'),
+    url('get_online', views.get_online, name='get_online'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

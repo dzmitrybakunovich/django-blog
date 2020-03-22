@@ -1202,7 +1202,7 @@ div.main_user_article:hover div.short_description {
 	height: 20px;
 	border-radius: 20px;
 	margin-top: 12px;
-	background-color: #fff;
+	background-color: #ea8d15;
 }
 
 .user_offline{
@@ -1211,7 +1211,7 @@ div.main_user_article:hover div.short_description {
 	height: 20px;
 	border-radius: 20px;
 	margin-top: 12px;
-	background-color: #ea8d15;
+	background-color: #fff;
 }
 
 .profile_info{
