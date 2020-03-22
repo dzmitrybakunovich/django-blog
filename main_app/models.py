@@ -1,7 +1,9 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.html import mark_safe
-from ckeditor.fields import RichTextField
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 
 class CustomUser(AbstractUser):
@@ -10,6 +12,11 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    def is_online(self):
+        if self.last_online:
+            return (timezone.now() - self.last_online) < timezone.timedelta(minutes=10)
+        return False
 
     def image_in_admin(self):
         return mark_safe(f'<img src="/media/{self.avatar}" width="110" height="110" style="object-fit: cover;" />')

@@ -12,9 +12,24 @@
     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
     </head>
     <body>
-        <script type="text/javascript">
+    <script type="text/javascript">
+        window.onload = function() {
+          getOnline();
+        };
 
-        </script>
+        function getOnline()
+            {
+                $.ajax({
+                    type : "GET",
+                    url: 'http://127.0.0.1:8000/get_online',
+                    datatype: 'json',
+                    success: function(data) {
+                        setTimeout(getOnline, 300000)
+                    }
+                }, );
+            }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <header>
         {% if request.user.is_authenticated %}
         <nav style="margin-top: 29px; margin-left: auto;">
