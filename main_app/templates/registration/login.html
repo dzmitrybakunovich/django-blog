@@ -1,15 +1,27 @@
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
     <label for="username" class="login-lb">LOGIN:</label>
-    <input class="login" type="text" name="username" value="" id="username"
-           placeholder="forexample@gmail.com" style="width: 200px; height: 25px;">
+    <input class="login"
+           type="text"
+           name="username"
+           value=""
+           id="username"
+           placeholder="forexample@gmail.com"
+           style="width: 200px; height: 25px;"
+           required>
     <label for="password" class="password-lb">PASSWORD:</label>
-    <input class="password" type="password" name="password" value="" id="password"
-           placeholder="••••••••••••" style="width: 200px; height: 25px;">
+    <input class="password"
+           type="password"
+           name="password"
+           value=""
+           id="password"
+           placeholder="••••••••••••"
+           style="width: 200px; height: 25px;"
+           required>
     <input type="submit" value="sign in" id="button_sign_in" />
-<input type="hidden" name="next" value="{{ next }}" />
+    <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
+{% if form.error %}
+    Неверный логин или пароль
 {% endif %}
