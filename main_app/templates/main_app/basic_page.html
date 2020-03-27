@@ -57,10 +57,7 @@
     <main>
     <div class="form-group" id = "registration" style="display: none;">
         {% include "registration/login.html" %}
-        {% if form.errors %}
-          <p>Your username and password didn't match. Please try again.</p>
-        {% endif %}
-        <input type="submit" value="LOG IN" id = "button_log_in" />
+        <input type="button" value="LOG IN" id = "button_log_in" onclick='location.href="{% url 'register' %}";' />
         <div class="social_icon">
         <div class="social vk">
             <a href="{% url 'social:begin' 'vk-oauth2' %}" target="_blank">

@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'delete/(?P<article_id>\d+)$', views.delete_article, name='delete_article'),
     url(r'edit/(?P<article_id>\d+)$', views.edit_article, name='edit_article'),
     url('get_online', views.get_online, name='get_online'),
+    url(r'register', views.RegisterFormView.as_view(), name='register'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

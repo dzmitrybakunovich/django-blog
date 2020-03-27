@@ -1,0 +1,85 @@
+{% extends 'main_app/basic_page.html' %}
+
+{% block content %}
+    <div class="main_new_user">
+        <div class="white_background_above_profile"></div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="new_user">
+                <p>Registration</p>
+            </div>
+            <div class="body_new_user">
+                <div class="create_new_user">
+                    <div>
+                        <label for="id_username">Имя пользователя:</label>
+                        <input type="text"
+                               name="username"
+                               maxlength="150"
+                               autofocus=""
+                               required=""
+                               id="id_username"
+                               placeholder="username"
+                        >
+                    </div>
+                    <div>
+                        <label for="id_email">Адрес электронной почты:</label>
+                        <input type="email"
+                               name="email"
+                               maxlength="254"
+                               id="id_email"
+                               placeholder="username@email.com"
+                        >
+                    </div>
+                    <div>
+                        <label for="id_first_name">Имя:</label>
+                        <input type="text"
+                               name="first_name"
+                               maxlength="30"
+                               id="id_first_name"
+                               placeholder="User"
+                        >
+                    </div>
+                    <div>
+                        <label for="id_last_name">Фамилия:</label>
+                        <input type="text"
+                               name="last_name"
+                               maxlength="150"
+                               id="id_last_name"
+                               placeholder="Name"
+                        >
+                    </div>
+                    <div>
+                        <label for="id_password1">Пароль:</label>
+                        <input type="password"
+                               name="password1"
+                               required=""
+                               id="id_password1"
+                               placeholder="••••••••••••"
+                        >
+                    </div>
+                    <div>
+                        <label for="id_password2">Подтверждение пароля:</label>
+                        <input type="password"
+                               name="password2"
+                               required=""
+                               id="id_password2"
+                               placeholder="••••••••••••"
+                        >
+                    </div>
+                    <div>
+                    <button type="submit" class="save_new_article" style="padding: 5px 15px 5px 15px;
+font-weight: bold;
+text-transform: uppercase;
+color: black;
+background-color: #d3cab4;
+display: inline-block;
+border: 2px solid #000;
+border-radius: 10px;
+font-size: 19px;
+float: right;">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

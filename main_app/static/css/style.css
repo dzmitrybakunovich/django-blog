@@ -160,7 +160,6 @@ main{
 }
 
 #registration{
-	width: 100%;
 	padding: 35px 0 85px 20%;
 }
 
@@ -565,6 +564,20 @@ a#user_in_last_comment:hover {
     line-height: 1.7em;
 }
 
+.send_comment{
+	margin-top: 10px;
+    padding: 3px 13px 3px 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: black;
+    background-color: #d3cab4;
+    display: inline-block;
+    border: 2px solid #000;
+    border-radius: 10px;
+    font-size: 19px;
+    float: right;
+}
+
 .comment_count{
 	background-color: #264041;
     width: 100%;
@@ -593,7 +606,7 @@ a#user_in_last_comment:hover {
 .comment_in_article{
 	display: flex;
 	margin-top: 30px;
-	margin-left: 15px;
+	margin-left: 80px;
 }
 
 .comment_in_article img{
@@ -1689,6 +1702,7 @@ div.main_user_article:hover div.short_description {
 }
 
 .new_article_title textarea{
+	box-sizing: border-box;
 	width: 100%;
 	font-weight: bold;
 	font-size: 18px;
@@ -1709,6 +1723,8 @@ div.main_user_article:hover div.short_description {
 	padding-top: 8px;
 }
 
+
+
 .new_article_text label{
 	font-weight: bold;
 	text-transform: uppercase;
@@ -1727,6 +1743,7 @@ div.main_user_article:hover div.short_description {
 }
 
 .new_article_short_description textarea{
+	box-sizing: border-box;
 	width: 100%;
 	font-weight: bold;
 	font-size: 18px;
@@ -1802,9 +1819,11 @@ div.main_user_article:hover div.short_description {
 }
 
 .django-ckeditor-widget{
+	width: 100%;
 	background: #d3cab4;
     border: 2px solid;
     border-radius: 10px;
+	box-sizing: border-box;
 }
 
 /* Edit and delete article on short description */
@@ -1827,4 +1846,66 @@ div.main_user_article:hover div.short_description {
 
 .edit_article:hover{
 	opacity: 0.65;
+}
+
+/* Registrations */
+.main_new_user{
+	height: 635px;
+    padding-top: 81px;
+    padding-bottom: 82px;
+    background-attachment: fixed;
+    background: url(/static/css/background.jpg);
+    background-size: cover;
+}
+
+.new_user{
+	height: 62px;
+    background-color: #264041;
+    border-bottom: 2px solid #ea8d15;
+}
+
+.new_user p{
+	width: fit-content;
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin: auto;
+    padding-top: 15px;
+}
+
+.body_new_user{
+	width: 1340px;
+    margin-left: auto;
+    margin-right: auto;
+	height: 520px;
+    background-color: rgba(255, 255, 255, 0.34);
+}
+
+.create_new_user{
+	width: 85%;
+	height: 100%;
+	margin: auto;
+}
+
+.create_new_user label{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.create_new_user div{
+	padding-top: 15px;
+}
+
+.create_new_user input{
+	width: 100%;
+	box-sizing: border-box;
+	font-weight: bold;
+	font-size: 18px;
+	resize: none;
+	outline: none;
+	overflow: hidden;
+	background: #d3cab4;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 7px;
 }

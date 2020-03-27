@@ -1,12 +1,12 @@
 import random
-from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from django.views.generic.edit import FormView
 
-from .forms import ArticleForm, CommentForm, CustomUserChangeForm
+from .forms import ArticleForm, CommentForm, CustomUserCreationForm
 from .models import Article, Comment, Like, CustomUser
 
 
@@ -41,8 +41,9 @@ def main_page(request):
 
 
 # page article with comments
-def page_article(request, article_id=1):
+def page_article(request, article_id):
     AMOUNT_LAST_ARTICLES = 2
+    article = Article.objects.get(id=article_id)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -68,8 +69,8 @@ def page_article(request, article_id=1):
         'main_app/article.html',
         {
             'form': form,
-            'last_articles': Article.objects.all().filter(author_id=request.user.id)[:AMOUNT_LAST_ARTICLES],
-            'article': Article.objects.get(id=article_id),
+            'last_articles': Article.objects.filter(author_id=article.author_id).order_by('-date')[:AMOUNT_LAST_ARTICLES],
+            'article': article,
             'is_liked': Like.objects.filter(article_id=article_id, user_id=request.user.id),
             'all_likes': Like.objects.filter(article_id=article_id, is_liked=True).count(),
             'marks': Like.objects.filter(article_id=article_id).values('is_liked').annotate(count=Count('is_liked')).order_by('-is_liked'),
@@ -96,7 +97,7 @@ def add_dislike(request, article_id):
     )
 
 
-def user_profile(request, user_id=1):
+def user_profile(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     return render(
         request,
@@ -120,6 +121,10 @@ def edit_user(request):
         if request.FILES.get('image'):
             user.avatar = request.FILES.get('image')
         user.save()
+        return redirect(
+            'user_profile',
+            user_id=user_id
+        )
     return render(
         request,
         'main_app/edit_user_profile.html',
@@ -131,7 +136,7 @@ def edit_user(request):
     )
 
 
-def article_created_by_user(request, user_id=1):
+def article_created_by_user(request, user_id):
     AMOUNT_LAST_COMMENTS = 4
     last_comments = Comment.objects.order_by('-date')[0:AMOUNT_LAST_COMMENTS]
     all_article = Article.objects.annotate(
@@ -210,3 +215,22 @@ def get_online(request):
         return HttpResponse({'status': 'Success'})
     except CustomUser.DoesNotExist:
         return HttpResponse({'status': 'Fail'})
+
+
+class RegisterFormView(FormView):
+    form_class = CustomUserCreationForm
+    success_url = "/"
+    template_name = 'registration/register.html'
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponse(status=404)
+        return render(
+            request,
+            self.template_name,
+        )
+
+    def form_valid(self, form):
+        form.save()
+        #g = send_mail('Subject here', 'Here is the message.', 'from@example.com',['{}'.format(form.email)], fail_silently=False)
+        return super(RegisterFormView, self).form_valid(form)
