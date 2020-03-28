@@ -60,7 +60,7 @@
                         <div class="articles_in_main">
                             {% for article in main_articles %}
                             <div class="main_user_article" style="    margin-bottom: 20px;">
-                                <a href="{% url 'article_detail'  article.id %}">
+                                <a href="{% url 'article_detail' article.slug %}">
                                     <div class="short_description" style="background-image: url('{{ article.image.url }}')">
                                         <div style="background: #00000087; width: 100%; height: 100%">
                                             <div class="top_border" style="
@@ -100,7 +100,7 @@
                                     <div class="user_article_and_img">
                                         <a class="user_article_date">{{ article.date.date }}</a>
                                         <br>
-                                        <a class="user_article_id" href="{% url 'article_detail'  article.id %}">{{  article.title }}</a>
+                                        <a class="user_article_id" href="{% url 'article_detail' article.slug %}">{{  article.title }}</a>
                                     </div>
                                     <div class="user_article_border">
                                         <div class="user_article_social">
@@ -147,7 +147,7 @@
         <div class="all_article">
         {% for article in articles %}
             <div class="user_article">
-                <a href="{% url 'article_detail' article.id %}">
+                <a href="{% url 'article_detail' article.slug %}">
                     <div class="short_description" style="background-image: url('{{ article.image.url }}')">
                         <div style="background: #00000087; width: 100%; height: 100%">
                             <div class="top_border" style="
@@ -186,7 +186,7 @@
                     <div class="user_article_and_img">
                         <a class="user_article_date">{{ article.date.date }}</a>
                         <br>
-                        <a class="user_article_id" href="{% url 'article_detail' article.id %}">{{ article.title }}</a>
+                        <a class="user_article_id" href="{% url 'article_detail' article.slug %}">{{ article.title }}</a>
                     </div>
                     <div class="user_article_border">
                         <div class="user_article_social">

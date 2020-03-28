@@ -3,11 +3,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.html import mark_safe
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='images/for_profile', null=True, blank=True)
     last_online = models.DateTimeField(blank=True, null=True)
+    slug = models.SlugField(max_length=40)
 
     def __str__(self):
         return self.email
@@ -22,11 +24,17 @@ class CustomUser(AbstractUser):
 
     image_in_admin.short_description = 'profile image'
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        return super(CustomUser, self).save(*args, **kwargs)
+
 
 class Article(models.Model):
     class Meta:
         db_table = 'article'
+
     title = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=40)
     image = models.ImageField(upload_to='images/for_article', null=True, blank=True)
     text = RichTextField()
     short_description = models.CharField(max_length=120, null=True, blank=True)
@@ -35,6 +43,10 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        return super(Article, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
