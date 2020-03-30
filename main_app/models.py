@@ -9,7 +9,6 @@ from django.utils.text import slugify
 class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='images/for_profile', null=True, blank=True)
     last_online = models.DateTimeField(blank=True, null=True)
-    slug = models.SlugField(max_length=40)
 
     def __str__(self):
         return self.email
@@ -23,10 +22,6 @@ class CustomUser(AbstractUser):
         return mark_safe(f'<img src="/media/{self.avatar}" width="110" height="110" style="object-fit: cover;" />')
 
     image_in_admin.short_description = 'profile image'
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.username)
-        return super(CustomUser, self).save(*args, **kwargs)
 
 
 class Article(models.Model):
