@@ -5,6 +5,8 @@ from django.utils.html import mark_safe
 from django.utils import timezone
 from django.utils.text import slugify
 
+from . import managers
+
 
 class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='images/for_profile', null=True, blank=True)
@@ -35,6 +37,8 @@ class Article(models.Model):
     short_description = models.CharField(max_length=120, null=True, blank=True)
     date = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('main_app.CustomUser', on_delete=models.CASCADE, blank=True, null=True)
+
+    objects = managers.ArticleQuerySet.as_manager()
 
     def __str__(self):
         return self.title
