@@ -18,7 +18,7 @@
     <div class="report_profile">
         {% if is_my_profile %}
             <div class="change_profile">
-                <a href="{% url 'edit_profile' %}">Изменить профиль</a>
+                <a href="{% url 'edit_profile' request.user.username %}">Изменить профиль</a>
         {% else %}
             <div class="change_profile">
                 <a href="#">Подписаться</a>
@@ -50,7 +50,7 @@
             <div class="statistic_user">
                 <div class="statistic">
                     <div class="text_in_statistic">
-                        <a href="{% url 'article_created_by_user' user.id %}" id="statistic_article">
+                        <a href="{% url 'user_articles' user.username %}" id="statistic_article">
                             Статьи
                         </a>
                     </div>

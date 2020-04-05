@@ -27,10 +27,10 @@ function open_statistic()
 	}
 }
 
-//Change image
+//Change images
 function change_image(){
 	image.click()
-	document.querySelector("#image").addEventListener("change", function () {
+	document.querySelector("#images").addEventListener("change", function () {
 		if (this.files[0]) {
 			fr = new FileReader();
 			fr.addEventListener("load", function () {

@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
     def image_in_admin(self):
         return mark_safe(f'<img src="/media/{self.avatar}" width="110" height="110" style="object-fit: cover;" />')
 
-    image_in_admin.short_description = 'profile image'
+    image_in_admin.short_description = 'profile images'
 
 
 class Article(models.Model):

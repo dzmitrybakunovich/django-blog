@@ -109,8 +109,8 @@ class UserView(View):
         user.username = request.POST.get('username')
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
-        if request.FILES.get('image'):
-            user.avatar = request.FILES.get('image')
+        if request.FILES.get('images'):
+            user.avatar = request.FILES.get('images')
         user.save()
         return redirect(
             'user_profile',
@@ -143,7 +143,7 @@ class ArticlePage(View):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.article = article
-            comment.user = request.user
+            comment.author = request.user
             comment.save()
             return redirect('article_detail', article_slug=kwargs['article_slug'])
 
@@ -186,11 +186,11 @@ class ArticleView(View):
         if self.request_type == 'CREATE':
             if form.is_valid():
                 article = form.save(commit=False)
-                article.author_id = request.user
+                article.author = request.user
                 article.save()
                 return redirect(
                     'article_detail',
-                    article_slug=kwargs['article_slug']
+                    article_slug=article.slug
                 )
 
         # If edit article
@@ -199,9 +199,13 @@ class ArticleView(View):
             article.title = request.POST.get('title')
             article.text = request.POST.get('text')
             article.short_description = request.POST.get('short_description')
-            if request.FILES.get('image'):
-                article.image = request.FILES.get('image')
+            if request.FILES.get('images'):
+                article.image = request.FILES.get('images')
             article.save()
+            return redirect(
+                'article_detail',
+                article_slug=article.slug
+            )
 
     def get(self, request, **kwargs):
         article = get_object_or_404(

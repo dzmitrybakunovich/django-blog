@@ -10,129 +10,130 @@
     <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'world.png' %}"/>
     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-    </head>
-    <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
     <script type="text/javascript">
-        window.onload = function() {
-          getOnline();
+        window.onload = function () {
+            getOnline();
         };
 
-        function getOnline()
-            {
-                $.ajax({
-                    type : "GET",
-                    url: 'http://127.0.0.1:8000/get_online',
-                    datatype: 'json',
-                    success: function(data) {
-                        setTimeout(getOnline, 300000)
-                    }
-                }, );
-            }
+        function getOnline() {
+            $.ajax({
+                type: "GET",
+                url: 'http://127.0.0.1:8000/get_online',
+                datatype: 'json',
+                success: function (data) {
+                    setTimeout(getOnline, 300000)
+                }
+            },);
+        }
     </script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <header>
         {% if request.user.is_authenticated %}
-        <nav style="margin-top: 29px; margin-left: auto;">
+            <nav style="margin-top: 29px; margin-left: auto;">
         {% else %}
-        <nav style="margin-top: 29px; margin-left: auto;">
+            <nav style="margin-top: 29px; margin-left: auto;">
         {% endif %}
-            <div class="topnav" id="MyTopnavs">
-                <a href="/">BLOG</a>
-                <a href="/about">ABOUT</a>
-                {% if request.user.is_authenticated %}
-                    <a href="">RATING</a>
-                    <a href="{% url 'user_profile' request.user.slug %}">PROFILE</a>
-                {% else %}
-                    <a href="">RATING</a>
-                {% endif %}
-                    <a href="" id="menu" class="icon">&#9776</a>
-            </div>
-        </nav>
+        <div class="topnav" id="MyTopnavs">
+            <a href="/">BLOG</a>
+            <a href="#">ABOUT</a>
             {% if request.user.is_authenticated %}
-                <a href="/accounts/logout" class="rollover2"></a>
+                <a href="">RATING</a>
+                <a href="{% url 'user_profile' request.user.username %}">PROFILE</a>
             {% else %}
-                <a href="#" class="rollover" onClick = "openbox('registration');"></a>
+                <a href="">RATING</a>
             {% endif %}
+            <a href="" id="menu" class="icon">&#9776</a>
+        </div>
+        </nav>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="rollover2"></a>
+        {% else %}
+            <a href="#" class="rollover" onClick="openbox('registration');"></a>
+        {% endif %}
     </header>
     <main>
-    <div class="form-group" id = "registration" style="display: none;">
-        {% include "registration/login.html" %}
-        <input type="button" value="LOG IN" id = "button_log_in" onclick='location.href="{% url 'register' %}";' />
-        <div class="social_icon">
-        <div class="social vk">
-            <a href="{% url 'social:begin' 'vk-oauth2' %}" target="_blank">
-                <i class="fa fa-vk fa-2x"></i>
-            </a>
-        </div>
-        <div class="social google-pluse">
-            <a href="{% url 'social:begin' 'google-oauth2' %}" target="_blank">
-                <i class="fa fa-google-plus fa-2x"></i>
-            </a>
-        </div>
-        <div class="social facebook">
-            <a href="#" target="_blank">
-                <i class="fa fa-facebook fa-2x"></i>
-            </a>
-        </div>
-        </div>
-        <a href="{% url 'password_reset' %}" class = "forgot">FORGOT PASSWORD</a>
-    </div>
-    </main>
-        <div class="white_bottom"></div>
-        <div class="body_logo">
-            <div class="header_logo">
-                <a>LIFESTYLE&amp;BLOG</a>
-            </div>
-        </div>
-    {% block content %}
-    {% block article_create %}
-    <div class = "main__blog">
-        {% include 'main_app/main_for_all_articles.html' %}
-    {% endblock %}
-        <div class="last__comments">
-            <p class="live_comments-title">LAST COMMENTS:</p>
-            {% for com in comment %}
-                <div class="comment">
-                    <p>
-                        <a href="/profile/{{com.author.id}}" id="user_in_last_comment">{{com.author.get_full_name}}</a>
-                          <br>
-                        <a style="font-size: 13px;">
-                            {% autoescape off %}
-                                {{com.text}}
-                            {% endautoescape %}
-                        </a>
-                    </p>
-                    <p style="margin-top: 15px;line-height: 1.2;">
-                        <a href="/articles/{{com.article.id}}" id="" style="font-size: 13px;
-                                                line-height: 1.4;
-                                                color: #ea8d15;
-                                                text-decoration: underline;
-                                                margin-bottom: 0;">{{com.article.title}}</a>
-                            <br>
-                        <a style="font-size: 10px;color: #8A8A8A;">{{com.date|naturaltime}}</a>
-                    </p>
+        <div class="form-group" id="registration" style="display: none;">
+            {% include "registration/login.html" %}
+            <input type="button" value="LOG IN" id="button_log_in" onclick='location.href="{% url 'register' %}";'/>
+            <div class="social_icon">
+                <div class="social vk">
+                    <a href="{% url 'social:begin' 'vk-oauth2' %}" target="_blank">
+                        <i class="fa fa-vk fa-2x"></i>
+                    </a>
                 </div>
-        {% endfor %}
+                <div class="social google-pluse">
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" target="_blank">
+                        <i class="fa fa-google-plus fa-2x"></i>
+                    </a>
+                </div>
+                <div class="social facebook">
+                    <a href="#" target="_blank">
+                        <i class="fa fa-facebook fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+            <a href="{% url 'password_reset' %}" class="forgot">FORGOT PASSWORD</a>
         </div>
+    </main>
+    <div class="white_bottom"></div>
+    <div class="body_logo">
+        <div class="header_logo">
+            <a>LIFESTYLE&amp;BLOG</a>
+        </div>
+    </div>
+    {% block content %}
+        {% block article_create %}
+            <div class="main__blog">
+            {% include 'main_app/main_for_all_articles.html' %}
+        {% endblock %}
+    <div class="last__comments">
+        <p class="live_comments-title">LAST COMMENTS:</p>
+        {% for comment in comments %}
+            <div class="comment">
+                <p>
+                    <a href="{% url 'user_profile' comment.author.username %}"
+                       id="user_in_last_comment">{{ comment.author.get_full_name }}</a>
+                    <br>
+                    <a style="font-size: 13px;">
+                        {% autoescape off %}
+                            {{ comment.text }}
+                        {% endautoescape %}
+                    </a>
+                </p>
+                <p style="margin-top: 15px;line-height: 1.2;">
+                    <a href="{% url 'article_detail' comment.article.slug %}" id="" style="font-size: 13px;
+                                                        line-height: 1.4;
+                                                        color: #ea8d15;
+                                                        text-decoration: underline;
+                                                        margin-bottom: 0;">{{ comment.article.title }}</a>
+                    <br>
+                    <a style="font-size: 10px;color: #8A8A8A;">{{ comment.date|naturaltime }}</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
     </div>
     {% endblock %}
     <div class="white_bottom"></div>
-        <div class="footer" style="display: flex; height: 60px;">
-            <div class="footer__info"><a href="" class="top-menu"
-            style="color: white;">Subscribe to notifications</a></div>
-            <div class="footer__socials">© 2019 Dmitry Bakunovich Blog, Inc</div>
-            <div class="footer_rss">
-                <a style="padding-bottom: 0; margin-right: 10px;margin-top: -5px;">Write to us:</a>
-                <a href="https://vk.com/write100400126">
-                    <img src="{% static 'css/vk-in-cycle.png' %}" class="image_for_footer_rss">
-                </a>
-                <a href="mailto:dv.bakunovich@gmail.com?subject=Тема&body=Текст">
-                    <img src="{% static 'css/google-in-cycle.png' %}" class="image_for_footer_rss">
-                </a>
-                <a href="https://linkedin.com/in/dmitrybakunovich ">
-                    <img src="{% static 'css/linkedin-in-cycle.png' %}" class="image_for_footer_rss">
-                </a>
-            </div>
+    <div class="footer" style="display: flex; height: 60px;">
+        <div class="footer__info">
+            <a href="" class="top-menu" style="color: white;">Subscribe to notifications</a>
         </div>
-    </body>
+        <div class="footer__socials">© 2019 Dmitry Bakunovich, Inc</div>
+        <div class="footer_rss">
+            <a style="padding-bottom: 0; margin-right: 10px;margin-top: -5px;">Write to us:</a>
+            <a href="https://vk.com/write100400126">
+                <img src="{% static 'images/vk-in-cycle.png' %}" class="image_for_footer_rss">
+            </a>
+            <a href="mailto:dv.bakunovich@gmail.com?subject=Тема&body=Текст">
+                <img src="{% static 'images/google-in-cycle.png' %}" class="image_for_footer_rss">
+            </a>
+            <a href="https://linkedin.com/in/dmitrybakunovich ">
+                <img src="{% static 'images/linkedin-in-cycle.png' %}" class="image_for_footer_rss">
+            </a>
+        </div>
+    </div>
+</body>
 </html>

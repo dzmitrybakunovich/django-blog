@@ -15,10 +15,14 @@
                             Title:
                         </label>
                         {% if type == 'CREATE' %}
-                            <textarea id="id_title" maxlength="150" name="title" required></textarea>
+                            <textarea id="id_title"
+                                      maxlength="90"
+                                      name="title"
+                                      required
+                            ></textarea>
                         {% else %}
                             <textarea id="id_title"
-                                      maxlength="150"
+                                      maxlength="90"
                                       name="title"
                                       required
                             >{{ article.title }}</textarea>
@@ -38,7 +42,10 @@
                             Short description:
                         </label>
                         {% if type == 'CREATE' %}
-                            <textarea name="short_description" maxlength="120" id="id_short_description" required></textarea>
+                            <textarea name="short_description"
+                                      maxlength="120"
+                                      id="id_short_description"
+                                      required></textarea>
                         {% else %}
                             <textarea name="short_description"
                                       maxlength="120"
@@ -51,25 +58,31 @@
                         <label class="label_new_image">
                             Image:
                         </label>
-                        <input type="file" class="inputfile" required oninput="upload_article_image()"  name="image" accept="image/*" id="id_image"  data-multiple-caption="{count} files selected" multiple />
+                        <input type="file"
+                               class="inputfile"
+                               required
+                               oninput="upload_article_image()"
+                               name="image"
+                               accept="image/*"
+                               id="id_image"
+                               data-multiple-caption="{count} files selected"
+                               multiple/>
                         <label for="id_image">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                            <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path>
+                                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3
+                                11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8
+                                2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7
+                                1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6
+                                0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
+                                </path>
                             </svg>
                             <span class="replace">
                                 Choose a file…
                             </span>
                         </label>
-                        <button type="submit" class="save_new_article" style="padding: 5px 15px 5px 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: black;
-    background-color: #d3cab4;
-    display: inline-block;
-    border: 2px solid #000;
-    border-radius: 10px;
-    font-size: 19px;
-    float: right;">Save</button>
+                        <button type="submit" class="save_new_article">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
