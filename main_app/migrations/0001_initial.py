@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=150)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='images/for_article')),
+                ('images', models.ImageField(blank=True, null=True, upload_to='images/for_article')),
                 ('text', ckeditor.fields.RichTextField()),
                 ('short_description', models.CharField(blank=True, max_length=120, null=True)),
                 ('date', models.DateTimeField(auto_now=True)),

@@ -1,107 +1,113 @@
 {% extends 'main_app/basic_page.html' %}
 {% block content %}
-<div class="body_profile">
-    <div class="white_background_above_profile"></div>
-    <form method="POST" class="post-form">
-    {% csrf_token %}
-        <div class="report_profile">
-            <div class="change_profile">
-                <a href="#" onclick="save.click()">Сохранить</a>
+    <div class="body_profile">
+        <div class="white_background_above_profile"></div>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            <div class="report_profile">
+                <div class="change_profile">
+                    <a href="#" onclick="save.click()">Сохранить</a>
+                </div>
             </div>
-        </div>
-        <div class="main_profile">
-            <div class="white_background_above_main"></div>
-            <div class="about_profile">
-                <div class="profile_info_img">
-                    <div class="image_in_edit">
-                        <div class="cursor_pointer">
-                            <img src="{{ user.avatar.url }}" id="main_image" onclick="change_image()">
+            <div class="main_profile">
+                <div class="white_background_above_main"></div>
+                <div class="about_profile">
+                    <div class="profile_info_img">
+                        <div class="image_in_edit">
+                            <div class="cursor_pointer">
+                                <img src="{{ user.avatar.url }}"
+                                     id="main_image"
+                                     onclick="change_image()"
+                                     alt="user_avatar">
+                            </div>
                         </div>
-                    </div>
-                    <div class="profile_info">
-                        <div class="profile_name">
-                            <input class="input_full_name" type="text" name="first_name" value="{{ user.first_name }}">
-                            <input class="input_full_name" type="text" name="last_name" value="{{ user.last_name }}">
-                            {% if user.is_authenticated %}
-                                <div class="user_online" style="margin-left: 11px;
+                        <div class="profile_info">
+                            <div class="profile_name">
+                                <input class="input_full_name" type="text" name="first_name"
+                                       value="{{ user.first_name }}">
+                                <input class="input_full_name" type="text" name="last_name"
+                                       value="{{ user.last_name }}">
+                                {% if user.is_authenticated %}
+                                    <div class="user_online" style="margin-left: 11px;
                                             width: 20px;
                                             height: 20px;
                                             border-radius: 20px;
                                             margin-top: 12px;
                                             background-color: #fff;"></div>
-                            {% else %}
-                                <div class="user_offline" style="margin-left: 11px;
+                                {% else %}
+                                    <div class="user_offline" style="margin-left: 11px;
                                             width: 20px;
                                             height: 20px;
                                             border-radius: 20px;
                                             margin-top: 12px;
                                             background-color: #ea8d15;"></div>
-                            {% endif %}
-                        </div>
-                        <a class="username_in_edit">USERNAME: </a>
-                        <input type="text" class="input" maxlength="20" name="username" value="{{ user.username }}"/>
-                        <input type="file" id="image" name="image">
-                        <input type="submit" id="save" value="Сохранить">
-                    </div>
-                </div>
-                <div class="statistic_user">
-                    <div class="statistic">
-                        <div class="text_in_statistic">
-                            <a href="{% url 'article_created_by_user' user.id %}" id="statistic_article">
-                                Статьи
-                            </a>
-                        </div>
-                        <div class="number_for_article">
-                            <a>{{ user_article_count }}</a>
-                        </div>
-                    </div>
-                    <div class="subscribers">
-                        <div class="text_in_statistic">
-                            <a id="statistic_subscribers">Подписчики</a>
-                        </div>
-                        <div class="number_for_subscribers">
-                            <a>NONE</a>
-                        </div>
-                    </div>
-                    <div class="subscriptions">
-                        <div class="text_in_statistic">
-                            <a id="statistic_subscriptions">Подписки</a>
-                        </div>
-                        <div class="number_for_subscriptions">
-                            <a>NONE</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cursor_pointer">
-                <div class="statistic_info_background" onclick="open_statistic()">
-                    <div class="main_statistic_button">
-                        <div class="body_statistic_button">
-                            <div class="statistic_button" id="statistic_button"></div>
-                            <p class="statistic_name">СТАТИСТИКА</p>
-                        </div>
-                    </div>
-                    <div class="white_background_statistic" id="body_statistic">
-                        <div class="body_with_statistic" id="block_with_statistic">
-                            <div class="statistic_comments">
-                                <div class="body_white_strip">
-                                    <div class="white_strip"></div>
-                                </div>
-                                <div class="text_in_body_statistic">комментарии: {{user_comment_count}}</div>
+                                {% endif %}
                             </div>
-                            <div class="statistic_likes">
-                                <div class="display_statistic_likes">
+                            <a class="username_in_edit">USERNAME: </a>
+                            <input type="text" class="input" maxlength="20" name="username"
+                                   value="{{ user.username }}"/>
+                            <input type="file" id="image" name="image">
+                            <input type="submit" id="save" value="Сохранить">
+                        </div>
+                    </div>
+                    <div class="statistic_user">
+                        <div class="statistic">
+                            <div class="text_in_statistic">
+                                <a href="{% url 'user_articles' user.username %}" id="statistic_article">
+                                    Статьи
+                                </a>
+                            </div>
+                            <div class="number_for_article">
+                                <a>{{ user_article_count }}</a>
+                            </div>
+                        </div>
+                        <div class="subscribers">
+                            <div class="text_in_statistic">
+                                <a id="statistic_subscribers">Подписчики</a>
+                            </div>
+                            <div class="number_for_subscribers">
+                                <a>NONE</a>
+                            </div>
+                        </div>
+                        <div class="subscriptions">
+                            <div class="text_in_statistic">
+                                <a id="statistic_subscriptions">Подписки</a>
+                            </div>
+                            <div class="number_for_subscriptions">
+                                <a>NONE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cursor_pointer">
+                    <div class="statistic_info_background" onclick="open_statistic()">
+                        <div class="main_statistic_button">
+                            <div class="body_statistic_button">
+                                <div class="statistic_button" id="statistic_button"></div>
+                                <p class="statistic_name">СТАТИСТИКА</p>
+                            </div>
+                        </div>
+                        <div class="white_background_statistic" id="body_statistic">
+                            <div class="body_with_statistic" id="block_with_statistic">
+                                <div class="statistic_comments">
                                     <div class="body_white_strip">
                                         <div class="white_strip"></div>
                                     </div>
-                                    <div class="text_in_body_statistic">нравится: NONE</div>
+                                    <div class="text_in_body_statistic">комментарии: {{ user_comment_count }}</div>
+                                </div>
+                                <div class="statistic_likes">
+                                    <div class="display_statistic_likes">
+                                        <div class="body_white_strip">
+                                            <div class="white_strip"></div>
+                                        </div>
+                                        <div class="text_in_body_statistic">нравится: NONE</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 {% endblock %}
