@@ -1,7 +1,6 @@
 from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView, RetrieveUpdateAPIView
 from rest_framework.generics import get_object_or_404
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
-from rest_framework.parsers import FileUploadParser
 
 from .serializers import ArticleSerializer, UserSerializer
 from ..models import Article, CustomUser
