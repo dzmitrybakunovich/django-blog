@@ -1,5 +1,5 @@
 //Open box with login and password
-function openbox(id){
+function open_box(id){
 	let display = document.getElementById(id).style.display;
 	if(display === 'none'){
 	   document.getElementById(id).style.display='block';

@@ -1,10 +1,11 @@
 import random
+
 from django.core.paginator import Paginator
-from django.db.models import Count, Q
+from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from django.views.generic import View, FormView, TemplateView
+from django.views.generic import View, FormView
 
 from .forms import ArticleForm, CommentForm, CustomUserCreationForm
 from .models import Article, Comment, Like, CustomUser

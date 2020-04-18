@@ -31,7 +31,7 @@ class ArticleInLine(admin.StackedInline):
 class ArticleAdmin(admin.ModelAdmin):
     fields = [
         'title',
-        'images',
+        'image',
         'short_description',
         'author',
         'text',

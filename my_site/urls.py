@@ -1,11 +1,11 @@
-from django.conf.urls import include, url
 from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    url('', include('main_app.urls')),
-    url('^admin/', admin.site.urls),
-    url('accounts/', include('django.contrib.auth.urls')),
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    url('', include('social_django.urls', namespace='social')),
-    url('api/', include('main_app.api.urls', namespace='api')),
+    path('', include('main_app.urls')),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('', include('social_django.urls', namespace='social')),
+    path('api/v1/', include('main_app.api.urls', namespace='api')),
 ]
